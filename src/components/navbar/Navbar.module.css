@@ -1,0 +1,18 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(219, 159, 169);
+}
+
+.item a {
+    color: rgb(23, 81, 83);
+    font-weight: 600;
+}
+
+.item a:hover {
+    font-weight: 500;
+    color: rgb(63, 60, 60);
+}
+
+.item a.active {
+    color: rgb(250, 212, 0);
+}

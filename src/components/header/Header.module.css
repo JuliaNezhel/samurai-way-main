@@ -1,0 +1,10 @@
+.header {
+    grid-area: h;
+    background-color: rgb(201, 236, 236);
+}
+
+.logo{
+    width: 100px;
+    height: 55px;
+    object-fit: cover;
+}
