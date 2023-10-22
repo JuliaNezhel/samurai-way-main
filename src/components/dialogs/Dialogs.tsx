@@ -1,25 +1,28 @@
 import { NavLink } from 'react-router-dom'
 import s from './Dialogs.module.css'
+import { DialogItem } from './gialogItem/DialogItem';
+import { Message } from './message/Message';
+
+
 
 export const Dialogs = () => {
+
+    const DialogData = [
+        {id: 1, name:'Olga'},
+        {id: 2, name:'Tom'},
+        {id: 3, name:'Mia'},
+    ]
+
+    const MessageData = [
+        {id: 1, name:'LOL'},
+        {id: 2, name:'sd'},
+        {id: 3, name:'ddsd'},
+    ]
+
     return (
         <section className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                <div className={s.dialogsItem}>
-                    <NavLink to='/dialog/1'>Olga</NavLink>
-                </div>
-                <div className={s.dialogsItem + ' ' + s.active}>
-                    <NavLink to='/dialog/2'>Marina</NavLink>
-                </div>
-                <div className={s.dialogsItem}>
-                    <NavLink to='/dialog/3'>Vera</NavLink>
-                </div>
-            </div>
-            <div className={s.massages}>
-                <div className={s.massage}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga deleniti iusto, sint libero expedita unde eos non nisi sequi dolorum, modi, repudiandae delectus. Distinctio fuga magni impedit quia iusto consequuntur?</div>
-                <div className={s.massage}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga deleniti iusto, sint libero expedita unde eos non nisi sequi dolorum, modi, repudiandae delectus. Distinctio fuga magni impedit quia iusto consequuntur?</div>
-                <div className={s.massage}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga deleniti iusto, sint libero expedita unde eos non nisi sequi dolorum, modi, repudiandae delectus. Distinctio fuga magni impedit quia iusto consequuntur?</div>
-            </div>
+            <DialogItem id={4} name={'sss'}/>
+            <Message message='LOL'/>
         </section>
     )
 }
