@@ -4,7 +4,7 @@
     grid-template-columns: 2fr 10fr;
 }
 .dialogsItems{
-    border: seagreen solid 5px;
+    border: seagreen solid 1px;
 }
 
 .dialogsItem{

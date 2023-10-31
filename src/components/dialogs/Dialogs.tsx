@@ -8,21 +8,30 @@ import { Message } from './message/Message';
 export const Dialogs = () => {
 
     const DialogData = [
-        {id: 1, name:'Olga'},
-        {id: 2, name:'Tom'},
-        {id: 3, name:'Mia'},
+        { id: 1, name: 'Olga' },
+        { id: 2, name: 'Tom' },
+        { id: 3, name: 'Mia' },
     ]
 
     const MessageData = [
-        {id: 1, name:'LOL'},
-        {id: 2, name:'sd'},
-        {id: 3, name:'ddsd'},
+        { id: 1, message: 'LOL' },
+        { id: 2, message: 'sd' },
+        { id: 3, message: 'ddsd' },
     ]
+    const dialogsElement = DialogData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} />)
+    const messagesElement = MessageData.map(m => <Message message={m.message} />)
 
     return (
         <section className={s.dialogs}>
-            <DialogItem id={4} name={'sss'}/>
-            <Message message='LOL'/>
+
+            <div>
+                {dialogsElement}
+            </div>
+            <div>
+                {messagesElement}
+            </div>
+            {/* <DialogItem id={4} name={'sss'}/> */}
+
         </section>
     )
 }
