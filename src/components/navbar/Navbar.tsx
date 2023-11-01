@@ -1,9 +1,14 @@
 import { NavLink } from 'react-router-dom';
+import { SideBarPageType } from '../../redux/state';
 import s from './Navbar.module.css';
+import { SideBar, SideBarDateType } from './sideBar/SideBar';
+import { state } from './../../redux/state';
 
+type NavbarPropstype = {
+    state: SideBarPageType
+}
 
-
-export const Navbar = () => {
+export const Navbar = (props: NavbarPropstype) => {
     
     return <nav className={s.nav}>
         <ul>
@@ -23,5 +28,6 @@ export const Navbar = () => {
                 <NavLink to='/setting' activeClassName={s.active}>Setting</NavLink>
             </li>
         </ul>
+        <SideBar sideBarDate={props.state.sideBarDate} />
     </nav>
 }
