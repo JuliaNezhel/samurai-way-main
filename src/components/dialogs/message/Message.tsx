@@ -1,10 +1,11 @@
 import s from './Message.module.css'
 
-type MessagePropsType = {
+export type MessageType = {
     message: string
+    id?: number
 }
 
-export const Message = (props: MessagePropsType) => {
+export const Message = (props: MessageType) => {
     return (
         <div className={s.massages}>
             <div className={s.massage}>{props.message}</div>

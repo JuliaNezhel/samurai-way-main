@@ -5,7 +5,7 @@ type MyPostsPropsType = {
     myPosts: Array<MyPosts>
 }
 
-type MyPosts = {
+export type MyPosts = {
     message: string
     imgSrc: string
     likeCount: number
