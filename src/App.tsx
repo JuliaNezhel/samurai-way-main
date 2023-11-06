@@ -8,10 +8,11 @@ import { Route } from 'react-router-dom';
 import { Music } from './components/music/Music';
 import { News } from './components/news/News';
 import { Setting } from './components/setting/Setting';
-import { StatePagesType } from './redux/state';
+import { StatePagesType, addPost } from './redux/state';
 
 type AppPropsType = {
     state: StatePagesType
+    addPost: (message: string) => void
 }
 
 
@@ -23,7 +24,7 @@ function App(props: AppPropsType) {
             <div className='app-wrapper-content'>
                 <Route
                     path='/profile'
-                    render={() => <Profile state={props.state.profilePage} />} />
+                    render={() => <Profile state={props.state.profilePage}  addPost={props.addPost}/>} />
                 <Route
                     path='/dialog'
                     render={() => <Dialogs

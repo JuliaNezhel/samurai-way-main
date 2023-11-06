@@ -1,14 +1,9 @@
+import { SideBarDateType } from "../../../redux/state"
 
 
 type SideBarPropsType = {
     sideBarDate: SideBarDateType[]
 }
-
-export type SideBarDateType = {
-    name: string
-    id: number
-}
-
 
 export const SideBar = (props: SideBarPropsType) => {
 

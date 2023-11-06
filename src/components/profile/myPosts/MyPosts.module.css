@@ -5,3 +5,10 @@
 .posts{
     margin-top: 15px;
 }
+
+.button{
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(93, 206, 140);
+    border-radius: 10px;
+}
