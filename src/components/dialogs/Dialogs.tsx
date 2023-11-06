@@ -1,8 +1,7 @@
-import { NavLink } from 'react-router-dom'
 import { MesssagesPageType } from '../../redux/state';
 import s from './Dialogs.module.css'
-import { DialogItem, DialogItemType } from './gialogItem/DialogItem';
-import { Message, MessageType } from './message/Message';
+import { DialogItem } from './gialogItem/DialogItem';
+import { Message } from './message/Message';
 
 type DialogsPropsType = {
     state: MesssagesPageType

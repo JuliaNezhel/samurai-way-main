@@ -1,5 +1,6 @@
 import s from './MyPosts.module.css';
 import { Post } from './post/Post'
+import React from 'react';
 
 type MyPostsPropsType = {
     myPosts: Array<MyPosts>
@@ -18,6 +19,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
         imgSrc={p.imgSrc}
         likeCount={p.likeCount} />)
 
+
+    let newPostElement = React.useRef<HTMLTextAreaElement>(null)
+
+    const addPost = () => {
+        if (newPostElement.current !== null) {
+            alert(newPostElement.current.value)
+        }
+    }
     return (
         <div className={s.postsBlok}>
             <h3>My posts</h3>
@@ -25,10 +34,10 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 New post
             </div>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPostElement}></textarea>
             </div>
             <div>
-                <button>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postsElement}
