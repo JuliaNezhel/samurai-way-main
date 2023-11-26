@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { SideBarPageType } from '../../redux/state';
 import s from './Navbar.module.css';
-import { SideBar,} from './sideBar/SideBar';
+import { SideBar, } from './sideBar/SideBar';
 
 type NavbarPropstype = {
     state: SideBarPageType
@@ -9,22 +9,37 @@ type NavbarPropstype = {
 
 export const Navbar = (props: NavbarPropstype) => {
 
+    const activClss = (param: any) => param.isActive ? s.active : ''
+
     return <nav className={s.nav}>
         <ul>
             <li className={s.item}>
-                <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
+                <NavLink to='/profile'
+                    className={activClss}
+                >Profile</NavLink>
             </li>
             <li className={s.item}>
-                <NavLink to='/dialog' activeClassName={s.active}>Messages</NavLink>
+                <NavLink to='/dialog'
+                    className={activClss}
+                >Messages</NavLink>
             </li>
             <li className={s.item}>
-                <NavLink to='/news' activeClassName={s.active}>News</NavLink>
+                <NavLink to='/news'
+                    className={activClss}
+                // style={(param) => {
+                //     return { color: param.isActive ? "rgb(250, 0, 33)" : undefined }
+                // }}
+                > News</NavLink>
             </li>
             <li className={s.item}>
-                <NavLink to='/music' activeClassName={s.active}>Music</NavLink>
+                <NavLink to='/music'
+                    className={activClss}
+                >Music</NavLink>
             </li>
             <li className={s.item}>
-                <NavLink to='/setting' activeClassName={s.active}>Setting</NavLink>
+                <NavLink to='/setting'
+                    className={activClss}
+                >Setting</NavLink>
             </li>
         </ul>
         <SideBar sideBarDate={props.state.sideBarDate} />

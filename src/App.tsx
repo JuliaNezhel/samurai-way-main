@@ -4,7 +4,7 @@ import { Navbar } from './components/navbar/Navbar';
 import { Header } from './components/header/Header';
 import { Profile } from './components/profile/Profile';
 import { Dialogs } from './components/dialogs/Dialogs';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Music } from './components/music/Music';
 import { News } from './components/news/News';
 import { Setting } from './components/setting/Setting';
@@ -22,22 +22,29 @@ function App(props: AppPropsType) {
             <Header />
             <Navbar state={props.state.sideBar} />
             <div className='app-wrapper-content'>
-                <Route
-                    path='/profile'
-                    render={() => <Profile state={props.state.profilePage}  addPost={props.addPost}/>} />
-                <Route
-                    path='/dialog'
-                    render={() => <Dialogs
-                        state={props.state.dialogsPage} />} />
-                <Route
-                    path='/news'
-                    render={() => <News />} />
-                <Route
-                    path='/music'
-                    render={() => <Music />} />
-                <Route
-                    path='/Setting'
-                    render={() => <Setting />} />
+                <Routes>
+                    <Route
+                        path='/profile'
+                        element={<Profile state={props.state.profilePage} addPost={props.addPost} />} />
+                    <Route
+                        path='/dialog'
+                        element={<Dialogs
+                            state={props.state.dialogsPage} />}
+                    />
+                    <Route
+                        path='/news'
+                        element={<News />}
+                    />
+                    <Route
+                        path='/music'
+                        element={<Music />}
+                    />
+                    <Route
+                        path='/Setting'
+                        element={<Setting />}
+                    />
+                </Routes>
+
             </div>
         </div>
     );
