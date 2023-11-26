@@ -1,5 +1,3 @@
-import { rerenderEntireTree } from "../render";
-
 export type StatePagesType = {
     profilePage: ProfilePageType;
     dialogsPage: MesssagesPageType;
@@ -42,6 +40,9 @@ export type SideBarDateType = {
     id: number
 }
 
+let rerenderEntireTree = () => {
+    console.log('rerenderEntireTree')
+}
 
 export const state: StatePagesType = {
     profilePage: {
@@ -97,10 +98,14 @@ export let addPost = () => {
     };
     state.profilePage.myPosts.push(newPost);
     updateNewPostText("")
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 };
 
 export let updateNewPostText = (newPost: string) => {
     state.profilePage.newPostText = newPost;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 };
+
+export const subsctiber = (observer: any) => {
+    rerenderEntireTree = observer
+}
