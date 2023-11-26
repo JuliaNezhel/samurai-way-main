@@ -8,13 +8,14 @@ export type StatePagesType = {
 
 export type ProfilePageType = {
     myPosts: MyPostsType[];
+    newPostText: string
 };
 
 export type MyPostsType = {
     message: string;
     imgSrc: string;
     likeCount: number;
-    id?: number;
+    id?: number | string;
 };
 
 export type MesssagesPageType = {
@@ -64,6 +65,7 @@ export const state: StatePagesType = {
                 likeCount: 34,
             },
         ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -86,13 +88,19 @@ export const state: StatePagesType = {
     },
 };
 
-export let addPost = (message: string) => {
+export let addPost = () => {
     const newPost = {
         id: 4,
-        message: message,
+        message: state.profilePage.newPostText,
         imgSrc: "https://w.forfun.com/fetch/fe/fe22186dba2df35f07573604aa8a0e63.jpeg?w=1470&r=0.5625",
         likeCount: 34,
     };
     state.profilePage.myPosts.push(newPost);
+    updateNewPostText("")
+    rerenderEntireTree(state)
+};
+
+export let updateNewPostText = (newPost: string) => {
+    state.profilePage.newPostText = newPost;
     rerenderEntireTree(state)
 };

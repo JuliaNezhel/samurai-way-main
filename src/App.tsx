@@ -12,7 +12,8 @@ import { StatePagesType, addPost } from './redux/state';
 
 type AppPropsType = {
     state: StatePagesType
-    addPost: (message: string) => void
+    addPost: () => void
+    updateNewPostText: (newPost: string) => void
 }
 
 
@@ -25,7 +26,11 @@ function App(props: AppPropsType) {
                 <Routes>
                     <Route
                         path='/profile'
-                        element={<Profile state={props.state.profilePage} addPost={props.addPost} />} />
+                        element={<Profile
+                            profilePage={props.state.profilePage}
+                            addPost={props.addPost} 
+                            updateNewPostText={props.updateNewPostText} 
+                            />} />
                     <Route
                         path='/dialog'
                         element={<Dialogs

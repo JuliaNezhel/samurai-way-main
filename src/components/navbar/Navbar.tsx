@@ -26,9 +26,6 @@ export const Navbar = (props: NavbarPropstype) => {
             <li className={s.item}>
                 <NavLink to='/news'
                     className={activClss}
-                // style={(param) => {
-                //     return { color: param.isActive ? "rgb(250, 0, 33)" : undefined }
-                // }}
                 > News</NavLink>
             </li>
             <li className={s.item}>

@@ -5,12 +5,14 @@ import { MyPostsType } from '../../../redux/state';
 
 type MyPostsPropsType = {
     myPosts: Array<MyPostsType>
-    addPost: (message: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (newPost: string) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    let postsElement = props.myPosts.map(p => <Post 
+    let postsElement = props.myPosts.map(p => <Post
         key={p.id}
         message={p.message}
         imgSrc={p.imgSrc}
@@ -20,11 +22,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        if (newPostElement.current !== null) {
-            props.addPost(newPostElement.current.value)
-            newPostElement.current.value = ''
-        }
+        props.addPost()
     }
+
+    const onPostText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        let newPost = e.currentTarget.value
+        props.updateNewPostText(newPost)
+    }
+
     return (
         <div className={s.postsBlok}>
             <h3>My posts</h3>
@@ -32,7 +37,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 New post
             </div>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement} onChange={onPostText} value={props.newPostText} />
             </div>
             <div>
                 <button className={s.button} onClick={addPost}>Add post</button>
