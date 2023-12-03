@@ -2,7 +2,7 @@ import s from './Profile.module.css';
 import { MyPosts } from './myPosts/MyPosts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
 import { ProfilePageType } from '../../redux/state';
-import { addPost } from './../../redux/state';
+
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
@@ -17,7 +17,7 @@ export const Profile = (props: ProfilePropsType) => {
         <div className={s.content}>
             <ProfileInfo />
             <MyPosts 
-            myPosts={props.profilePage.myPosts}  
+            myPosts={props.profilePage.posts}  
             newPostText={props.profilePage.newPostText}
             addPost={props.addPost}
             updateNewPostText={props.updateNewPostText}

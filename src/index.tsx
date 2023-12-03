@@ -2,13 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import {  state, addPost, StatePagesType, updateNewPostText, subsctiber } from "./redux/state";
+import { store } from "./redux/state";
 import { BrowserRouter } from "react-router-dom";
 
 export let rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App   state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+            <App state={store.getstate()}
+                addPost={store.addPost.bind(store)}
+                updateNewPostText={store.updateNewPostText.bind(store)} />
         </BrowserRouter>,
         document.getElementById("root")
     );
@@ -16,4 +18,4 @@ export let rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-subsctiber(rerenderEntireTree);
+store.subsctiber(rerenderEntireTree);

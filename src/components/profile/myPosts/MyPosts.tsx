@@ -22,6 +22,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
+        debugger
         props.addPost()
     }
 

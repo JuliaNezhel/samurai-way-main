@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Music } from './components/music/Music';
 import { News } from './components/news/News';
 import { Setting } from './components/setting/Setting';
-import { StatePagesType, addPost } from './redux/state';
+import { StatePagesType} from './redux/state';
 
 type AppPropsType = {
     state: StatePagesType
