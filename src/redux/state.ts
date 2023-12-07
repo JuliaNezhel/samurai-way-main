@@ -5,7 +5,7 @@ export type StoreType = {
     _callSubscrider: () => void
     // addPost: () => void
     // updateNewPostText: (newPost: string) => void
-    dispatch: (action: DispatchActionsTypes ) => void
+    dispatch: (action: DispatchActionsTypes) => void
 }
 
 export type StatePagesType = {
@@ -53,19 +53,6 @@ export type DispatchActionsTypes = AddPostActionACType | UpdateNewPostTextAction
 type AddPostActionACType = ReturnType<typeof addPostAC>
 type UpdateNewPostTextActionACType = ReturnType<typeof updateNewPostTextAC>
 
-
-const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-
-const updateNewPostTextAC = (newPost:string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newPost
-    } as const
-}
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -138,5 +125,15 @@ export const store: StoreType = {
     }
 }
 
+export const addPostAC = () => ({
+    type: 'ADD-POST'
+} as const
+)
+
+export const updateNewPostTextAC = (newPost: string) => ({
+    type: "UPDATE-NEW-POST-TEXT",
+    newPost
+} as const
+)
 
 // window.store =

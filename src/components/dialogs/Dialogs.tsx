@@ -23,6 +23,10 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div>
                 {messagesElement}
             </div>
+            <div>
+                <input />
+                <button>send</button>
+            </div>
         </section>
     )
 }
