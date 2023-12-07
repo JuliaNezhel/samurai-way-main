@@ -8,12 +8,13 @@ import { Route, Routes } from 'react-router-dom';
 import { Music } from './components/music/Music';
 import { News } from './components/news/News';
 import { Setting } from './components/setting/Setting';
-import { StatePagesType} from './redux/state';
+import { DispatchActionsTypes, StatePagesType } from './redux/state';
 
 type AppPropsType = {
     state: StatePagesType
-    addPost: () => void
-    updateNewPostText: (newPost: string) => void
+    // addPost: () => void
+    // updateNewPostText: (newPost: string) => void
+    dispatch: (action: DispatchActionsTypes) => void
 }
 
 
@@ -26,10 +27,10 @@ function App(props: AppPropsType) {
                 <Routes>
                     <Route
                         path='/profile'
-                        element={<Profile
-                            profilePage={props.state.profilePage}
-                            addPost={props.addPost} 
-                            updateNewPostText={props.updateNewPostText} 
+                        element={
+                            <Profile
+                                profilePage={props.state.profilePage}
+                                dispatch={props.dispatch}
                             />} />
                     <Route
                         path='/dialog'
