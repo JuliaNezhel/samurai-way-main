@@ -1,3 +1,4 @@
+
 export type StoreType = {
     _state: StatePagesType
     subsctiber: (observer: () => void) => void
@@ -10,7 +11,7 @@ export type StoreType = {
 
 export type StatePagesType = {
     profilePage: ProfilePageType;
-    dialogsPage: MesssagesPageType;
+    dialogsPage: DialogsPagesType;
     sideBar: SideBarPageType;
 };
 
@@ -26,14 +27,15 @@ export type MyPostsType = {
     id?: number | string;
 };
 
-export type MesssagesPageType = {
-    dialogs: DialogItemType[];
-    messages: MessageType[];
+export type DialogsPagesType = {
+    dialogs: DialogItemType[]
+    messages: MessageType[]
+    newMessagesText: string
 };
 
 export type MessageType = {
-    message: string
-    id?: number
+    message: any
+    id: number | string
 }
 
 export type DialogItemType = {
@@ -49,7 +51,7 @@ export type SideBarDateType = {
     name: string
     id: number
 }
-export type DispatchActionsTypes = AddPostActionACType | UpdateNewPostTextActionACType
+export type DispatchActionsTypes = AddPostActionACType | UpdateNewPostTextActionACType | UpdateNewMwssageType | SendMessageACType
 type AddPostActionACType = ReturnType<typeof addPostAC>
 type UpdateNewPostTextActionACType = ReturnType<typeof updateNewPostTextAC>
 
@@ -89,6 +91,7 @@ export const store: StoreType = {
                 { id: 2, message: "sd" },
                 { id: 3, message: "ddsd" },
             ],
+            newMessagesText: '',
         },
         sideBar: {
             sideBarDate: [
@@ -121,6 +124,14 @@ export const store: StoreType = {
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newPost;
             this._callSubscrider()
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessagesText = action.newMessage
+            this._callSubscrider()
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessagesText
+            this._state.dialogsPage.newMessagesText = ""
+            this._state.dialogsPage.messages.push({id: 2, message: body});
+            this._callSubscrider()
         }
     }
 }
@@ -133,7 +144,21 @@ export const addPostAC = () => ({
 export const updateNewPostTextAC = (newPost: string) => ({
     type: "UPDATE-NEW-POST-TEXT",
     newPost
-} as const
-)
+} as const)
 
+export type UpdateNewMwssageType = ReturnType<typeof updateNewMwssageAC>
+
+export const updateNewMwssageAC = (newMessage:string) => {
+    return {
+        type:  "UPDATE-NEW-MESSAGE-BODY",
+        newMessage
+    } as const
+}
+
+export type SendMessageACType = ReturnType<typeof sendMessageAC>
+export const sendMessageAC = () => {
+    return {
+        type:  "SEND-MESSAGE",
+    } as const
+}
 // window.store =
