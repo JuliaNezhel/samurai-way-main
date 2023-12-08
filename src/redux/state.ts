@@ -1,12 +1,12 @@
+import { dialogsReduser, DialogsReduserActionType } from './dialogs-reduser';
+import { ProfileACType, profileReduser } from './profile-reduser';
 
 export type StoreType = {
     _state: StatePagesType
     subsctiber: (observer: () => void) => void
     getstate: () => StatePagesType
     _callSubscrider: () => void
-    // addPost: () => void
-    // updateNewPostText: (newPost: string) => void
-    dispatch: (action: DispatchActionsTypes) => void
+    dispatch: (action: any) => void
 }
 
 export type StatePagesType = {
@@ -51,9 +51,7 @@ export type SideBarDateType = {
     name: string
     id: number
 }
-export type DispatchActionsTypes = AddPostActionACType | UpdateNewPostTextActionACType | UpdateNewMwssageType | SendMessageACType
-type AddPostActionACType = ReturnType<typeof addPostAC>
-type UpdateNewPostTextActionACType = ReturnType<typeof updateNewPostTextAC>
+export type DispatchActionsTypes = ProfileACType | DialogsReduserActionType
 
 export const store: StoreType = {
     _state: {
@@ -111,54 +109,12 @@ export const store: StoreType = {
         this._callSubscrider = observer
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                imgSrc: "https://w.forfun.com/fetch/fe/fe22186dba2df35f07573604aa8a0e63.jpeg?w=1470&r=0.5625",
-                likeCount: 34,
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscrider()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newPost;
-            this._callSubscrider()
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessagesText = action.newMessage
-            this._callSubscrider()
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessagesText
-            this._state.dialogsPage.newMessagesText = ""
-            this._state.dialogsPage.messages.push({id: 2, message: body});
-            this._callSubscrider()
-        }
+        this._state.profilePage = profileReduser(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
+
+        this._callSubscrider()
+
     }
 }
 
-export const addPostAC = () => ({
-    type: 'ADD-POST'
-} as const
-)
-
-export const updateNewPostTextAC = (newPost: string) => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newPost
-} as const)
-
-export type UpdateNewMwssageType = ReturnType<typeof updateNewMwssageAC>
-
-export const updateNewMwssageAC = (newMessage:string) => {
-    return {
-        type:  "UPDATE-NEW-MESSAGE-BODY",
-        newMessage
-    } as const
-}
-
-export type SendMessageACType = ReturnType<typeof sendMessageAC>
-export const sendMessageAC = () => {
-    return {
-        type:  "SEND-MESSAGE",
-    } as const
-}
 // window.store =

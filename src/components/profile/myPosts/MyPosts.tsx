@@ -1,7 +1,8 @@
 import s from './MyPosts.module.css';
 import { Post } from './post/Post'
 import React, { useRef } from 'react';
-import { addPostAC, DispatchActionsTypes, MyPostsType, updateNewPostTextAC } from '../../../redux/state';
+import { DispatchActionsTypes, MyPostsType,  } from '../../../redux/state';
+import { addPostAC, updateNewPostTextAC } from '../../../redux/profile-reduser';
 
 type MyPostsPropsType = {
     myPosts: Array<MyPostsType>
@@ -21,8 +22,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        debugger
-        props.dispatch(addPostAC())
+        if (props.newPostText.trim() != '') {
+            props.dispatch(addPostAC())
+        }
     }
 
     const onPostText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
