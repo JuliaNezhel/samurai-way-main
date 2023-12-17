@@ -9,12 +9,16 @@ import { Music } from './components/music/Music';
 import { News } from './components/news/News';
 import { Setting } from './components/setting/Setting';
 import { DispatchActionsTypes, StatePagesType } from './redux/state';
+import { Store, EmptyObject } from "redux";
+import { DialogsContainer } from './components/dialogs/DialogsContainer';
 
 type AppPropsType = {
-    state: any
+    state: StatePagesType
     // addPost: () => void
     // updateNewPostText: (newPost: string) => void
     dispatch: (action: DispatchActionsTypes) => void
+    store: Store<EmptyObject & StatePagesType, any>
+
 }
 
 
@@ -29,15 +33,15 @@ function App(props: AppPropsType) {
                         path='/profile'
                         element={
                             <Profile
+                                store={props.store}
                                 profilePage={props.state.profilePage}
                                 dispatch={props.dispatch}
                             />} />
                     <Route
                         path='/dialog'
                         element={
-                            <Dialogs
-                                state={props.state.dialogsPage}
-                                dispatch={props.dispatch} />}
+                            <DialogsContainer  store={props.store}/>
+                            }
                     />
                     <Route
                         path='/news'

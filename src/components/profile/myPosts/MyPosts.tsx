@@ -5,9 +5,11 @@ import { DispatchActionsTypes, MyPostsType,  } from '../../../redux/state';
 import { addPostAC, updateNewPostTextAC } from '../../../redux/profile-reduser';
 
 type MyPostsPropsType = {
+    updateNewPostText: any
+    addPost: any
     myPosts: Array<MyPostsType>
     newPostText: string
-    dispatch: (action: DispatchActionsTypes) => void
+    // dispatch: (action: DispatchActionsTypes) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -22,14 +24,16 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        if (props.newPostText.trim() != '') {
-            props.dispatch(addPostAC())
-        }
+        // if (props.newPostText.trim() != '') {
+            // props.addPost()
+        // }
+        props.addPost()
     }
 
     const onPostText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         let newPost = e.currentTarget.value
-        props.dispatch(updateNewPostTextAC(newPost))
+        props.updateNewPostText(newPost)
+        // props.dispatch(updateNewPostTextAC(newPost))
     }
 
     return (

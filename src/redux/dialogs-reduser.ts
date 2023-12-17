@@ -12,7 +12,7 @@ let initialState = {
         { id: 2, message: "sd" },
         { id: 3, message: "ddsd" },
     ],
-    newMessagesText: '',
+    newMessagesText: 'start message',
 }
 
 export const dialogsReduser = (state: DialogsPagesType = initialState, action: DialogsReduserActionType): DialogsPagesType => {
