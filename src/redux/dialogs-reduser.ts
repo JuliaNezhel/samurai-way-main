@@ -1,6 +1,21 @@
 import { DialogsPagesType } from "./state"
 
-export const dialogsReduser = (state: DialogsPagesType, action: DialogsReduserActionType): DialogsPagesType => {
+
+let initialState = {
+    dialogs: [
+        { id: 1, name: "Olga" },
+        { id: 2, name: "Tom" },
+        { id: 3, name: "Mia" },
+    ],
+    messages: [
+        { id: 1, message: "LOL" },
+        { id: 2, message: "sd" },
+        { id: 3, message: "ddsd" },
+    ],
+    newMessagesText: '',
+}
+
+export const dialogsReduser = (state: DialogsPagesType = initialState, action: DialogsReduserActionType): DialogsPagesType => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY": {

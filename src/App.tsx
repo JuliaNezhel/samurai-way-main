@@ -11,7 +11,7 @@ import { Setting } from './components/setting/Setting';
 import { DispatchActionsTypes, StatePagesType } from './redux/state';
 
 type AppPropsType = {
-    state: StatePagesType
+    state: any
     // addPost: () => void
     // updateNewPostText: (newPost: string) => void
     dispatch: (action: DispatchActionsTypes) => void
