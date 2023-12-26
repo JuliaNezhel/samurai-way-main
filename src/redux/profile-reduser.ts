@@ -1,5 +1,6 @@
 import { initialize } from "redux-form";
-import { ProfilePageType } from "./state";
+import { v1 } from "uuid";
+import { MyPostsType, ProfilePageType } from "./state";
 
 let initialState = {
     posts: [
@@ -25,29 +26,27 @@ let initialState = {
     newPostText: 'g'
 }
 
-export const profileReduser = (state: ProfilePageType = initialState, action: AddPostActionACType | UpdateNewPostTextActionACType):ProfilePageType  => {
+export const profileReduser = (state: ProfilePageType = initialState, action: AddPostActionACType | UpdateNewPostTextActionACType): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST': {
-            const newPost = {
-                id: 4,
+            const newPost: MyPostsType = {
+                id: v1(),
                 message: state.newPostText,
                 imgSrc: "https://w.forfun.com/fetch/fe/fe22186dba2df35f07573604aa8a0e63.jpeg?w=1470&r=0.5625",
                 likeCount: 34,
             };
-            state.posts.push(newPost);
             state.newPostText = '';
-            return state
+            return { ...state, posts: [...state.posts, newPost] }
         }
         case "UPDATE-NEW-POST-TEXT": {
-            state.newPostText = action.newPost;
-            return state
+            return { ...state, newPostText: action.newPost }
         }
         default: return state
     }
 }
 
 
-export type ProfileACType = AddPostActionACType | UpdateNewPostTextActionACType 
+export type ProfileACType = AddPostActionACType | UpdateNewPostTextActionACType
 type AddPostActionACType = ReturnType<typeof addPostAC>
 type UpdateNewPostTextActionACType = ReturnType<typeof updateNewPostTextAC>
 
@@ -60,4 +59,5 @@ export const addPostAC = () => ({
 export const updateNewPostTextAC = (newPost: string) => ({
     type: "UPDATE-NEW-POST-TEXT",
     newPost
-} as const)
+} as const
+)

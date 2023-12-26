@@ -1,3 +1,4 @@
+import { v1 } from "uuid"
 import { DialogsPagesType } from "./state"
 
 
@@ -10,7 +11,7 @@ let initialState = {
     messages: [
         { id: 1, message: "LOL" },
         { id: 2, message: "sd" },
-        { id: 3, message: "ddsd" },
+        { id: 3, message: "Hello" },
     ],
     newMessagesText: 'start message',
 }
@@ -19,23 +20,23 @@ export const dialogsReduser = (state: DialogsPagesType = initialState, action: D
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY": {
-            state.newMessagesText = action.newMessage
-            return state
+            // state.newMessagesText = action.newMessage
+            return {...state, newMessagesText: action.newMessage}
         }
         case "SEND-MESSAGE": {
             let body = state.newMessagesText
             state.newMessagesText = ""
-            state.messages.push({ id: 2, message: body });
-            return state
+            // state.messages.push({ id: 2, message: body });
+            return {...state, messages: [...state.messages, { id: v1(), message: body }]}
         }
         default: return state
     }
 }
 
-export type DialogsReduserActionType =  UpdateNewMwssageType | SendMessageACType
+export type DialogsReduserActionType =  UpdateNewMessageType | SendMessageACType
 
-export type UpdateNewMwssageType = ReturnType<typeof updateNewMwssageAC>
-export const updateNewMwssageAC = (newMessage: string) => {
+export type UpdateNewMessageType = ReturnType<typeof updateNewMessageAC>
+export const updateNewMessageAC = (newMessage: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         newMessage
