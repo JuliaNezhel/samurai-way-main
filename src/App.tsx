@@ -3,7 +3,6 @@ import './App.css';
 import { Navbar } from './components/navbar/Navbar';
 import { Header } from './components/header/Header';
 import { Profile } from './components/profile/Profile';
-import { Dialogs } from './components/dialogs/Dialogs';
 import { Route, Routes } from 'react-router-dom';
 import { Music } from './components/music/Music';
 import { News } from './components/news/News';
@@ -33,15 +32,17 @@ function App(props: AppPropsType) {
                         path='/profile'
                         element={
                             <Profile
-                                store={props.store}
+                                // store={props.store}
                                 profilePage={props.state.profilePage}
                                 dispatch={props.dispatch}
                             />} />
                     <Route
                         path='/dialog'
                         element={
-                            <DialogsContainer  store={props.store}/>
-                            }
+                            <DialogsContainer
+                                // store={props.store}
+                            />
+                        }
                     />
                     <Route
                         path='/news'

@@ -1,5 +1,4 @@
-import { sendMessageAC, updateNewMwssageAC } from '../../redux/dialogs-reduser';
-import { DialogsPagesType, DispatchActionsTypes, } from '../../redux/state';
+import { DialogsPagesType,} from '../../redux/state';
 import s from './Dialogs.module.css'
 import { DialogItem } from './gialogItem/DialogItem';
 import { Message } from './message/Message';
