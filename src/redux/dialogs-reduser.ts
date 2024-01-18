@@ -25,9 +25,7 @@ export const dialogsReduser = (state: DialogsPagesType = initialState, action: D
         }
         case "SEND-MESSAGE": {
             let body = state.newMessagesText
-            state.newMessagesText = ""
-            // state.messages.push({ id: 2, message: body });
-            return {...state, messages: [...state.messages, { id: v1(), message: body }]}
+            return {...state, messages: [...state.messages, { id: v1(), message: body, }], newMessagesText: ''}
         }
         default: return state
     }

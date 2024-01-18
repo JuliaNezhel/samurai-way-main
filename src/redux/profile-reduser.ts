@@ -35,8 +35,7 @@ export const profileReduser = (state: ProfilePageType = initialState, action: Ad
                 imgSrc: "https://w.forfun.com/fetch/fe/fe22186dba2df35f07573604aa8a0e63.jpeg?w=1470&r=0.5625",
                 likeCount: 34,
             };
-            state.newPostText = '';
-            return { ...state, posts: [...state.posts, newPost] }
+            return { ...state, posts: [...state.posts, newPost], newPostText: '' }
         }
         case "UPDATE-NEW-POST-TEXT": {
             return { ...state, newPostText: action.newPost }

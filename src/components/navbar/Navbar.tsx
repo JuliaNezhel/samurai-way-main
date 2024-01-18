@@ -29,9 +29,9 @@ export const Navbar = (props: NavbarPropstype) => {
                 > News</NavLink>
             </li>
             <li className={s.item}>
-                <NavLink to='/music'
+                <NavLink to='/users'
                     className={activClss}
-                >Music</NavLink>
+                >Users</NavLink>
             </li>
             <li className={s.item}>
                 <NavLink to='/setting'
