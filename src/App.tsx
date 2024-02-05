@@ -12,10 +12,6 @@ import { AppStateType } from "./redux/redux-store";
 
 type AppPropsType = {
   state: AppStateType;
-  // addPost: () => void
-  // updateNewPostText: (newPost: string) => void
-  dispatch: (action: any) => void;
-  store: any;
 };
 
 function App(props: AppPropsType) {
@@ -25,24 +21,8 @@ function App(props: AppPropsType) {
       <Navbar state={props.state.sideBar} />
       <div className="app-wrapper-content">
         <Routes>
-          <Route
-            path="/profile"
-            element={
-              <Profile
-                // store={props.store}
-                profilePage={props.state.profilePage}
-                dispatch={props.dispatch}
-              />
-            }
-          />
-          <Route
-            path="/dialog"
-            element={
-              <DialogsContainer
-              // store={props.store}
-              />
-            }
-          />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dialog" element={<DialogsContainer />} />
           <Route path="/news" element={<News />} />
           <Route path="/users" element={<UsersContainer />} />
           <Route path="/Setting" element={<Setting />} />

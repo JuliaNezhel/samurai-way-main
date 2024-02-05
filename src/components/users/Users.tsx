@@ -3,45 +3,14 @@ import s from "./Users.module.css";
 import { v1 } from "uuid";
 import axios from "axios";
 import { UsersPropsType } from "./UsersContainer";
+import avatar from "./../../assets/image/avatar.jpg";
 
 export const Users = (props: UsersPropsType) => {
-  // debugger;
   if (props.usersPage.users.length === 0) {
-    props.setUsers([
-      {
-        id: v1(),
-        photos: {
-          large: "",
-          small: "",
-        },
-        name: "Antonio",
-        status: "It is cool!",
-        followed: true,
-        location: {
-          city: "Parish",
-          country: "France",
-        },
-      },
-      {
-        id: v1(),
-        photos: {
-          large: "",
-          small: "",
-        },
-        name: "Merry",
-        status: "you are beautiful!",
-        followed: true,
-        location: {
-          city: "Italy",
-          country: "Rom",
-        },
-      },
-    ]);
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((res) => props.setUsers(res.data.items));
   }
-
-  // if (props.usersPage.users.length === 0) {
-  //   axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res =>  res)
-  // }
 
   return (
     <section className={s.Music}>
@@ -50,7 +19,10 @@ export const Users = (props: UsersPropsType) => {
           <div key={u.id}>
             <span>
               <div>
-                <img src={u.photos.small} className={s.userPhoto} />
+                <img
+                  src={u.photos.small != null ? u.photos.small : avatar}
+                  className={s.userPhoto}
+                />
               </div>
               <div>
                 {u.followed ? (
@@ -77,8 +49,8 @@ export const Users = (props: UsersPropsType) => {
                   <div>{u.status}</div>
                 </span>
                 <span>
-                  <div>{u.location.city}</div>
-                  <div>{u.location.country}</div>
+                  <div>{"u.location.city"}</div>
+                  <div>{"u.location.country"}</div>
                 </span>
               </span>
             </span>

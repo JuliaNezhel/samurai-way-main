@@ -4,15 +4,17 @@ export type UserType = {
   photos: PhotosUsersType;
   status: string;
   followed: boolean;
-  location: {
-    city: string;
-    country: string;
-  };
+  uniqueUrlName: null
+  // location: {
+  //   city: string;
+  //   country: string;
+  // };
 };
 
+
 export type PhotosUsersType = {
-  small: string;
-  large: string;
+  small: string | null;
+  large: string | null;
 };
 
 let initialState = {

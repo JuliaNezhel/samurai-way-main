@@ -6,14 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import { storeR } from "./redux/redux-store";
 import { Provider } from "react-redux";
 
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={storeR}>
-                <App state={storeR.getState()}
-                    dispatch={storeR.dispatch.bind(storeR)}
-                    store={storeR}
-                />
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById("root")
-    );
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={storeR}>
+      <App state={storeR.getState()} />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
+);
