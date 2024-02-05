@@ -1,4 +1,4 @@
-import { DialogsPagesType,} from '../../redux/state';
+import { DialogsPagesType } from '../../redux/dialogs-reduser';
 import s from './Dialogs.module.css'
 import { DialogItem } from './gialogItem/DialogItem';
 import { Message } from './message/Message';

@@ -1,8 +1,9 @@
 import s from './MyPosts.module.css';
-import { DispatchActionsTypes, MyPostsType, StatePagesType, } from '../../../redux/state';
 import { addPostAC, updateNewPostTextAC } from '../../../redux/profile-reduser';
 import { MyPosts } from './MyPosts';
 import { connect } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
+import { Dispatch } from 'redux';
 
 
 type MyPostsPropsTypeContainer = {
@@ -12,14 +13,14 @@ type MyPostsPropsTypeContainer = {
     // store: Store<EmptyObject & StatePagesType, any>
 }
 
-const mapStateToProps = (state: StatePagesType) => {
+const mapStateToProps = (state:  AppStateType) => {
     return {
         myPosts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addPost: () => dispatch(addPostAC()),
         updateNewPostText: (text: string) => dispatch(updateNewPostTextAC(text)),

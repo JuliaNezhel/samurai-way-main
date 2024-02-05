@@ -1,54 +1,79 @@
-import { UserType } from '../../redux/users-reduser'
-import s from './Users.module.css'
-import { v1 } from 'uuid';
+import { UserType } from "../../redux/users-reduser";
+import s from "./Users.module.css";
+import { v1 } from "uuid";
+import axios from "axios";
+import { UsersPropsType } from "./UsersContainer";
 
-export const Users = (props: { users: UserType[] }) => {
-  //   props.setUsers( [
-  //     {
-  //         id: v1(),
-  //         photoUrl: 'd',
-  //         fullName: "Antonio",
-  //         status: 'It is cool!',
-  //         followed: true,
-  //         location: {
-  //             city: 'Parish',
-  //             country: 'France'
-  //         }
-  //     },
-  //     {
-  //         id: v1(),
-  //         photoUrl: 'd',
-  //         fullName: "Merry",
-  //         status: 'you are beautiful!',
-  //         followed: true,
-  //         location: {
-  //             city: 'Italy',
-  //             country: 'Rom'
+export const Users = (props: UsersPropsType) => {
+  // debugger;
+  if (props.usersPage.users.length === 0) {
+    props.setUsers([
+      {
+        id: v1(),
+        photos: {
+          large: "",
+          small: "",
+        },
+        name: "Antonio",
+        status: "It is cool!",
+        followed: true,
+        location: {
+          city: "Parish",
+          country: "France",
+        },
+      },
+      {
+        id: v1(),
+        photos: {
+          large: "",
+          small: "",
+        },
+        name: "Merry",
+        status: "you are beautiful!",
+        followed: true,
+        location: {
+          city: "Italy",
+          country: "Rom",
+        },
+      },
+    ]);
+  }
 
-  //         }
-  //     },
-  // ],)
- if (props.users.length === 0) {
-  
- }
+  // if (props.usersPage.users.length === 0) {
+  //   axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res =>  res)
+  // }
 
   return (
     <section className={s.Music}>
-      {
-        props.users.map((u) => {
-          return <div key={u.id}>
+      {props.usersPage.users.map((u) => {
+        return (
+          <div key={u.id}>
             <span>
               <div>
-                <img src={u.photoUrl} className={s.userPhoto} />
+                <img src={u.photos.small} className={s.userPhoto} />
               </div>
               <div>
-                {u.followed
-                  ? <button onClick={() => { }}>Follow</button>
-                  : <button onClick={() => { u.id }} >Unfollow</button>}
+                {u.followed ? (
+                  <button
+                    onClick={() => {
+                      props.unFollow(u.id);
+                    }}
+                  >
+                    Follow
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      props.follow(u.id);
+                    }}
+                  >
+                    Unfollow
+                  </button>
+                )}
               </div>
               <span>
                 <span>
-                  <div>{u.fullName}</div>
+                  <div>{u.name}</div>
                   <div>{u.status}</div>
                 </span>
                 <span>
@@ -57,9 +82,9 @@ export const Users = (props: { users: UserType[] }) => {
                 </span>
               </span>
             </span>
-
           </div>
-        })}
+        );
+      })}
     </section>
-  )
-}
+  );
+};

@@ -1,23 +1,18 @@
-import { SideBarDateType } from "../../../redux/state"
-
+import { SideBarPageType } from "../../../redux/sideBar-reduser";
 
 type SideBarPropsType = {
-    sideBarDate: SideBarDateType[]
-}
+  sideBarDate: SideBarPageType;
+};
 
 export const SideBar = (props: SideBarPropsType) => {
+  const friendsList = props.sideBarDate.sideBarDate.map((el) => (
+    <li key={el.id}>{el.name}</li>
+  ));
 
-
-    const friendsList = props.sideBarDate.map(el => <li key={el.id}>{el.name}</li>)
-
-    return (
-        <section>
-            <h1>
-                FRIENDS
-            </h1>
-            <ul>
-                {friendsList}
-            </ul>
-        </section>
-    )
-}
+  return (
+    <section>
+      <h1>FRIENDS</h1>
+      <ul>{friendsList}</ul>
+    </section>
+  );
+};

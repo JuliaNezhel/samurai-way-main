@@ -1,4 +1,5 @@
 import { sendMessageAC, updateNewMessageAC } from '../../redux/dialogs-reduser';
+import { AppStateType } from '../../redux/redux-store';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 
@@ -9,7 +10,7 @@ type DialogsContainerPropsType = {
 
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         state: state.dialogsPage
     }
