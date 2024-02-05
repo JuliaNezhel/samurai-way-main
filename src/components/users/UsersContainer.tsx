@@ -6,9 +6,9 @@ import {
   setUsersAC,
 } from "../../redux/users-reduser";
 import { unFollowAC } from "./../../redux/users-reduser";
-import { Users } from "./Users";
 import { AppStateType } from "../../redux/redux-store";
 import { Dispatch } from "redux";
+import { Users } from "./Users";
 
 type MapStateToPropsType = {
   usersPage: UsersPageType;

@@ -4,13 +4,12 @@ export type UserType = {
   photos: PhotosUsersType;
   status: string;
   followed: boolean;
-  uniqueUrlName: null
+  uniqueUrlName: null;
   // location: {
   //   city: string;
   //   country: string;
   // };
 };
-
 
 export type PhotosUsersType = {
   small: string | null;
