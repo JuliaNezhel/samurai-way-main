@@ -7,12 +7,16 @@ import avatar from "./../../assets/image/avatar.jpg";
 export class Users extends React.Component<UsersPropsType> {
   constructor(props: UsersPropsType) {
     super(props);
+  }
+
+  componentDidMount(): void {
     if (this.props.usersPage.users.length === 0) {
       axios
         .get("https://social-network.samuraijs.com/api/1.0/users")
         .then((res) => this.props.setUsers(res.data.items));
     }
   }
+
   render(): React.ReactNode {
     return (
       <section className={s.Music}>
