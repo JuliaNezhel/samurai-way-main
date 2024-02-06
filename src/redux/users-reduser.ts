@@ -18,11 +18,12 @@ export type PhotosUsersType = {
 
 let initialState = {
   users: [] as UserType[],
+  pageSize: 100,
+  totalCount: 50,
+  carrenstPage: 1,
 };
 
-export type UsersPageType = {
-  users: UserType[];
-};
+export type UsersPageType = typeof initialState;
 
 export const usersReduser = (
   state: UsersPageType = initialState,
@@ -52,7 +53,13 @@ export const usersReduser = (
       };
     }
     case "SET-USERS": {
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: action.users };
+    }
+    case "SET-CURRENT-PAGE": {
+      return { ...state, carrenstPage: action.currentPage };
+    }
+    case "SET-TOTAL-COUNT": {
+      return { ...state, totalCount: action.totalCount };
     }
 
     default:
@@ -60,10 +67,18 @@ export const usersReduser = (
   }
 };
 
-export type UsersACType = FollowACType | UnFollowACType | SetUsersType;
+export type UsersACType =
+  | FollowACType
+  | UnFollowACType
+  | SetUsersType
+  | SetCurrentPageType
+  | SetTotalCountType;
+
 type FollowACType = ReturnType<typeof followAC>;
 type UnFollowACType = ReturnType<typeof unFollowAC>;
 type SetUsersType = ReturnType<typeof setUsersAC>;
+type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>;
+type SetTotalCountType = ReturnType<typeof setTotalCountAC>;
 
 export const setUsersAC = (users: UserType[]) =>
   ({
@@ -82,3 +97,16 @@ export const unFollowAC = (userID: string) =>
     type: "UNFOLLOW",
     userID,
   } as const);
+
+export const setCurrentPageAC = (currentPage: number) =>
+  ({
+    type: "SET-CURRENT-PAGE",
+    currentPage,
+  } as const);
+
+export let setTotalCountAC = (totalCount: number) => {
+  return {
+    type: "SET-TOTAL-COUNT",
+    totalCount,
+  } as const;
+};

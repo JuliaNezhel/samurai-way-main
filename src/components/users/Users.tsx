@@ -10,17 +10,51 @@ export class Users extends React.Component<UsersPropsType> {
   }
 
   componentDidMount(): void {
-    if (this.props.usersPage.users.length === 0) {
-      axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((res) => this.props.setUsers(res.data.items));
-    }
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.carrentPage}`
+      )
+      .then((res) => {
+        this.props.setUsers(res.data.items)
+        this.props.setTotalCount(res.data.totalCount)
+      });
   }
 
+  onPageChanged = (pageNumber: number) => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
+      )
+      .then((res) => this.props.setUsers(res.data.items));
+  };
+
   render(): React.ReactNode {
+    let pageCount = Math.ceil(this.props.totalCount / this.props.pageSize);
+
+    let pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(i);
+    }
+
     return (
-      <section className={s.Music}>
-        {this.props.usersPage.users.map((u) => {
+      <section className={s.container}>
+        <div className={s.pages}>
+          {pages.map((p) => {
+            return (
+              <span
+                className={this.props.carrentPage === p ? s.selectedPage : ""}
+                onClick={() => {
+                  this.onPageChanged(p);
+                }}
+              >
+                {p}
+              </span>
+            );
+          })}
+        </div>
+
+        {this.props.users.map((u) => {
           return (
             <div key={u.id}>
               <span>

@@ -1,6 +1,5 @@
-.userPhoto {
-  width: 200px;
-  height: 200px;
+.container {
+  margin: 20px;
 }
 
 .userPhoto {
@@ -8,4 +7,32 @@
   height: 100px;
   border-radius: 40%;
   object-fit: cover;
+}
+
+.userPhoto:hover {
+  opacity: 0.5;
+}
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.pages span{
+  color: #4f1a64;
+  display: inline-block;
+  border: #4f1a64 solid 1px;
+  border-radius: 50%;
+  padding: 5px;
+  max-width: 20px;
+  cursor: pointer;
+
+}
+
+.selectedPage {
+  font-weight: 900;
+  color: #170120;
+
 }
