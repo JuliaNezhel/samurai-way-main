@@ -1,3 +1,4 @@
+import React from "react";
 import { connect } from "react-redux";
 import {
   UserType,
@@ -10,6 +11,7 @@ import { unFollowAC } from "./../../redux/users-reduser";
 import { AppStateType } from "../../redux/redux-store";
 import { Dispatch } from "redux";
 import { Users } from "./Users";
+import axios from "axios";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
@@ -23,8 +25,48 @@ type MapDispatchToPropsType = {
 
 export type UsersPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
+export class UsersContainer extends React.Component<UsersPropsType> {
+  constructor(props: UsersPropsType) {
+    super(props);
+  }
+
+  componentDidMount(): void {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.carrentPage}`
+      )
+      .then((res) => {
+        this.props.setUsers(res.data.items);
+        this.props.setTotalCount(res.data.totalCount);
+      });
+  }
+
+  onPageChanged = (pageNumber: number) => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
+      )
+      .then((res) => this.props.setUsers(res.data.items));
+  };
+
+  render(): React.ReactNode {
+    return (
+      <Users
+        totalCount={this.props.totalCount}
+        pageSize={this.props.pageSize}
+        carrentPage={this.props.carrentPage}
+        onPageChanged={this.onPageChanged}
+        users={this.props.users}
+        follow={this.props.follow}
+        unFollow={this.props.unFollow}
+      />
+    );
+  }
+}
+
 let mapStateToProps = (state: AppStateType) => {
-  return {
+  return { 
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalCount: state.usersPage.totalCount,
@@ -52,7 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   };
 };
 
-export const UsersContainer = connect(
+export  default  connect(
   mapStateToProps,
   mapDispatchToProps
-)(Users);
+)(UsersContainer);

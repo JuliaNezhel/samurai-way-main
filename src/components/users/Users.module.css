@@ -3,8 +3,8 @@
 }
 
 .userPhoto {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 40%;
   object-fit: cover;
 }
@@ -20,7 +20,7 @@
   margin-bottom: 15px;
 }
 
-.pages span{
+.pages span {
   color: #4f1a64;
   display: inline-block;
   border: #4f1a64 solid 1px;
@@ -28,11 +28,9 @@
   padding: 5px;
   max-width: 20px;
   cursor: pointer;
-
 }
 
 .selectedPage {
   font-weight: 900;
   color: #170120;
-
 }

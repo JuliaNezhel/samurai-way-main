@@ -7,8 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import { News } from "./components/news/News";
 import { Setting } from "./components/setting/Setting";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
-import { UsersContainer } from "./components/users/UsersContainer";
 import { AppStateType } from "./redux/redux-store";
+import UsersContainer from "./components/users/UsersContainer";
 
 type AppPropsType = {
   state: AppStateType;
