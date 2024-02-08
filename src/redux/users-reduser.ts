@@ -21,6 +21,7 @@ let initialState = {
   pageSize: 100,
   totalCount: 50,
   carrenstPage: 1,
+  isFetching: true,
 };
 
 export type UsersPageType = typeof initialState;
@@ -61,6 +62,9 @@ export const usersReduser = (
     case "SET-TOTAL-COUNT": {
       return { ...state, totalCount: action.totalCount };
     }
+    case "TOGGLE-IS-FETCHING": {
+      return {...state, isFetching: action.iIsFetching}
+    }
 
     default:
       return state;
@@ -72,13 +76,15 @@ export type UsersACType =
   | UnFollowACType
   | SetUsersType
   | SetCurrentPageType
-  | SetTotalCountType;
+  | SetTotalCountType
+  | ToggleIsFetchingType;
 
 type FollowACType = ReturnType<typeof followAC>;
 type UnFollowACType = ReturnType<typeof unFollowAC>;
 type SetUsersType = ReturnType<typeof setUsersAC>;
 type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>;
 type SetTotalCountType = ReturnType<typeof setTotalCountAC>;
+type ToggleIsFetchingType = ReturnType<typeof toggleIsFetchingAC>;
 
 export const setUsersAC = (users: UserType[]) =>
   ({
@@ -108,5 +114,12 @@ export let setTotalCountAC = (totalCount: number) => {
   return {
     type: "SET-TOTAL-COUNT",
     totalCount,
+  } as const;
+};
+
+export let toggleIsFetchingAC = (iIsFetching: boolean) => {
+  return {
+    type: "TOGGLE-IS-FETCHING",
+    iIsFetching,
   } as const;
 };

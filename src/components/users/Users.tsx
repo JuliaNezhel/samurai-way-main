@@ -11,6 +11,7 @@ type UType = {
   users: UserType[];
   follow: (userId: string) => void;
   unFollow: (userId: string) => void;
+  isFetching?:any
 };
 
 export const Users = (props: UType) => {
