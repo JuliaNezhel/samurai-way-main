@@ -1,6 +1,14 @@
+import { ProfileType } from "../../../redux/profile-reduser";
+import { Preloader } from "../../common/Loader";
 import s from "./ProfileInfo.module.css";
+import plus from "../../../assets/image/plus.jpg";
+import minus from "../../../assets/image/minus.jpg";
 
-export const ProfileInfo = () => {
+export const ProfileInfo = (props: { profile: ProfileType }) => {
+  if (!props.profile) {
+    return <Preloader />;
+  }
+
   return (
     <div className={s.content}>
       <div className={s.containerImg}>
@@ -9,7 +17,18 @@ export const ProfileInfo = () => {
           className={s.contentIMG}
         ></img>
       </div>
-      <div className={s.deckriptionBlok}>ava + description</div>
+      <div className={s.deckriptionBlok}>
+        <img src={props.profile.photos.large} className={s.profileIMG} />
+        <div>{props.profile.aboutMe}</div>
+        <div>
+          Поиск работы -
+          {props.profile.lookingForAJob ? (
+            <img className={s.isFindJobIMG} src={plus} />
+          ) : (
+            <img className={s.isFindJobIMG} src={minus} />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

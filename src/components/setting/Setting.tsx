@@ -1,9 +1,5 @@
-import s from './Setting.module.css'
+import s from "./Setting.module.css";
 
 export const Setting = () => {
-    return (
-        <section className={s.Setting}>
-            Setting
-        </section>
-    )
-}
+  return <section className={s.Setting}>Setting</section>;
+};

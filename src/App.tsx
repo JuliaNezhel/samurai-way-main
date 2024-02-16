@@ -9,6 +9,7 @@ import { Setting } from "./components/setting/Setting";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
 import { AppStateType } from "./redux/redux-store";
 import UsersContainer from "./components/users/UsersContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
 type AppPropsType = {
   state: AppStateType;
@@ -21,7 +22,7 @@ function App(props: AppPropsType) {
       <Navbar state={props.state.sideBar} />
       <div className="app-wrapper-content">
         <Routes>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfileContainer />} />
           <Route path="/dialog" element={<DialogsContainer />} />
           <Route path="/news" element={<News />} />
           <Route path="/users" element={<UsersContainer />} />

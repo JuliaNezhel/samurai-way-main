@@ -2,11 +2,10 @@ import s from "./Profile.module.css";
 import { ProfileInfo } from "./profileInfo/ProfileInfo";
 import { MyPostsContainer } from "./myPosts/MyPostsContainer";
 
-
-export const Profile = () => {
+export const Profile = (props: any) => {
   return (
     <div className={s.content}>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile}/>
       <MyPostsContainer />
     </div>
   );

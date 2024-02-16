@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css";
 import avatar from "./../../assets/image/avatar.jpg";
 import { UserType } from "../../redux/users-reduser";
+import { NavLink } from "react-router-dom";
 
 type UType = {
   carrentPage: number;
@@ -11,7 +12,7 @@ type UType = {
   users: UserType[];
   follow: (userId: string) => void;
   unFollow: (userId: string) => void;
-  isFetching?:any
+  isFetching?: any;
 };
 
 export const Users = (props: UType) => {
@@ -43,10 +44,12 @@ export const Users = (props: UType) => {
           <div key={u.id}>
             <span>
               <div>
-                <img
-                  src={u.photos.small != null ? u.photos.small : avatar}
-                  className={s.userPhoto}
-                />
+                <NavLink to={"/profile/" + u.id}>
+                  <img
+                    src={u.photos.small != null ? u.photos.small : avatar}
+                    className={s.userPhoto}
+                  />
+                </NavLink>
               </div>
               <div>
                 {u.followed ? (

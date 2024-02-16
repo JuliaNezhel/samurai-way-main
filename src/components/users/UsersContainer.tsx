@@ -28,7 +28,7 @@ type MapDispatchToPropsType = {
 
 export type UsersPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
-export class UsersContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
   constructor(props: UsersPropsType) {
     super(props);
   }
@@ -99,15 +99,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     setUsers: (users: UserType[]) => {
       dispatch(setUsersAC(users));
     },
-    setCurrentPage: (pageNumder: number) => {
-      dispatch(setCurrentPageAC(pageNumder));
-    },
-    setTotalCount: (totalCount: number) => {
-      dispatch(setTotalCountAC(totalCount));
-    },
-    toggleIsFetching: (iIsFetching: boolean) => {
-      dispatch(toggleIsFetchingAC(iIsFetching));
-    },
+    setCurrentPage: (pageNumder: number) =>
+      dispatch(setCurrentPageAC(pageNumder)),
+    setTotalCount: (totalCount: number) =>
+      dispatch(setTotalCountAC(totalCount)),
+    toggleIsFetching: (iIsFetching: boolean) =>
+      dispatch(toggleIsFetchingAC(iIsFetching)),
   };
 };
 
