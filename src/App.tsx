@@ -2,8 +2,7 @@ import React from "react";
 import "./App.css";
 import { Navbar } from "./components/navbar/Navbar";
 import { Header } from "./components/header/Header";
-import { Profile } from "./components/profile/Profile";
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { News } from "./components/news/News";
 import { Setting } from "./components/setting/Setting";
 import { DialogsContainer } from "./components/dialogs/DialogsContainer";
@@ -21,13 +20,17 @@ function App(props: AppPropsType) {
       <Header />
       <Navbar state={props.state.sideBar} />
       <div className="app-wrapper-content">
-        <Routes>
-          <Route path="/profile" element={<ProfileContainer />} />
-          <Route path="/dialog" element={<DialogsContainer />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/users" element={<UsersContainer />} />
-          <Route path="/Setting" element={<Setting />} />
-        </Routes>
+        {/* <Routes> */}
+        <Route
+          exact
+          path="/profile/:userId?"
+          render={() => <ProfileContainer />}
+        />
+        <Route exact path="/dialog" render={() => <DialogsContainer />} />
+        <Route exact path="/news" render={() => <News />} />
+        <Route exact path="/users" render={() => <UsersContainer />} />
+        <Route exact path="/Setting" render={() => <Setting />} />
+        {/* </Routes> */}
       </div>
     </div>
   );

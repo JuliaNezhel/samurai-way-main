@@ -5,6 +5,7 @@ import plus from "../../../assets/image/plus.jpg";
 import minus from "../../../assets/image/minus.jpg";
 
 export const ProfileInfo = (props: { profile: ProfileType }) => {
+  console.log(props.profile);
   if (!props.profile) {
     return <Preloader />;
   }
@@ -18,15 +19,14 @@ export const ProfileInfo = (props: { profile: ProfileType }) => {
         ></img>
       </div>
       <div className={s.deckriptionBlok}>
-        <img src={props.profile.photos.large} className={s.profileIMG} />
+        <img src={props.profile?.photos?.large} className={s.profileIMG} />
         <div>{props.profile.aboutMe}</div>
         <div>
           Поиск работы -
-          {props.profile.lookingForAJob ? (
-            <img className={s.isFindJobIMG} src={plus} />
-          ) : (
-            <img className={s.isFindJobIMG} src={minus} />
-          )}
+          <img
+            className={s.isFindJobIMG}
+            src={props.profile.lookingForAJob ? plus : minus}
+          />
         </div>
       </div>
     </div>
