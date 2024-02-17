@@ -10,3 +10,9 @@
     border-radius: 50%;
     
 }
+
+.loginBlock{
+    float: right;
+    color: rgb(23, 81, 83);
+    font-size: 25px;
+}

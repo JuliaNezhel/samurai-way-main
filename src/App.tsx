@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Navbar } from "./components/navbar/Navbar";
-import { Header } from "./components/header/Header";
 import { Route } from "react-router-dom";
 import { News } from "./components/news/News";
 import { Setting } from "./components/setting/Setting";
@@ -9,6 +8,7 @@ import { DialogsContainer } from "./components/dialogs/DialogsContainer";
 import { AppStateType } from "./redux/redux-store";
 import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 
 type AppPropsType = {
   state: AppStateType;
@@ -17,7 +17,7 @@ type AppPropsType = {
 function App(props: AppPropsType) {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <Navbar state={props.state.sideBar} />
       <div className="app-wrapper-content">
         {/* <Routes> */}
