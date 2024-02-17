@@ -11,7 +11,7 @@ type DialogsPropsType = {
 };
 
 export const Dialogs = (props: DialogsPropsType) => {
-  console.log(props.state.newMessagesText);
+
 
   const dialogsElement = props.state.dialogs.map((dialog) => (
     <DialogItem id={dialog.id} name={dialog.name} />

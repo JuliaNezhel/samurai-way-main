@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { AppStateType } from "../../redux/redux-store";
 import { Dispatch } from "redux";
-import { AuthResponseType, ResponsrType } from "./api/apiType";
+import { AuthResponseType, ResponsrType } from "./api/api";
 import { setUserDataAC } from "../../redux/auth-reduser";
 
 //type

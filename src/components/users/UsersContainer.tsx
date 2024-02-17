@@ -14,12 +14,13 @@ import { Dispatch } from "redux";
 import { Users } from "./Users";
 import axios from "axios";
 import { Preloader } from "../common/Loader";
+import { UsersAPI } from "../header/api/api";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
 type MapDispatchToPropsType = {
-  follow: (userId: string) => void;
-  unFollow: (userId: string) => void;
+  follow: (userId: number) => void;
+  unFollow: (userId: number) => void;
   setUsers: (users: UserType[]) => void;
   setCurrentPage: (pageNumder: number) => void;
   setTotalCount: (totalCount: number) => void;
@@ -34,27 +35,21 @@ class UsersContainer extends React.Component<UsersPropsType> {
   }
 
   componentDidMount(): void {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.carrentPage}`
-      )
-      .then((res) => {
+    UsersAPI.getUsers(this.props.pageSize, this.props.currentPage).then(
+      (data) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(res.data.items);
-        this.props.setTotalCount(res.data.totalCount);
-      });
+        this.props.setUsers(data.items);
+        this.props.setTotalCount(data.totalCount);
+      }
+    );
   }
 
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
-      )
-      .then((res) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(res.data.items);
-      });
+    UsersAPI.getUsers(this.props.pageSize, pageNumber).then((data) => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+    });
   };
 
   render(): React.ReactNode {
@@ -66,7 +61,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
           <Users
             totalCount={this.props.totalCount}
             pageSize={this.props.pageSize}
-            carrentPage={this.props.carrentPage}
+            carrentPage={this.props.currentPage}
             onPageChanged={this.onPageChanged}
             users={this.props.users}
             follow={this.props.follow}
@@ -83,17 +78,17 @@ let mapStateToProps = (state: AppStateType) => {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalCount: state.usersPage.totalCount,
-    carrentPage: state.usersPage.carrenstPage,
+    currentPage: state.usersPage.carrenstPage,
     isFetching: state.usersPage.isFetching,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   return {
-    follow: (userId: string) => {
+    follow: (userId: number) => {
       dispatch(followAC(userId));
     },
-    unFollow: (userId: string) => {
+    unFollow: (userId: number) => {
       dispatch(unFollowAC(userId));
     },
     setUsers: (users: UserType[]) => {

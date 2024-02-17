@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import avatar from "./../../assets/image/avatar.jpg";
 import { UserType } from "../../redux/users-reduser";
 import { NavLink } from "react-router-dom";
+import { UsersAPI } from "../header/api/api";
 
 type UType = {
   carrentPage: number;
@@ -10,8 +11,8 @@ type UType = {
   pageSize: number;
   onPageChanged: (p: number) => void;
   users: UserType[];
-  follow: (userId: string) => void;
-  unFollow: (userId: string) => void;
+  follow: (userId: number) => void;
+  unFollow: (userId: number) => void;
   isFetching?: any;
 };
 
@@ -28,6 +29,7 @@ export const Users = (props: UType) => {
         {pages.map((p) => {
           return (
             <span
+              key={p}
               className={props.carrentPage === p ? s.selectedPage : ""}
               onClick={() => {
                 props.onPageChanged(p);
@@ -55,7 +57,11 @@ export const Users = (props: UType) => {
                 {u.followed ? (
                   <button
                     onClick={() => {
-                      props.unFollow(u.id);
+                      UsersAPI.unfollow(u.id).then((res) => {
+                        if (res.data.resultCode === 0) {
+                          props.unFollow(u.id);
+                        }
+                      });
                     }}
                   >
                     Follow
@@ -63,7 +69,11 @@ export const Users = (props: UType) => {
                 ) : (
                   <button
                     onClick={() => {
-                      props.follow(u.id);
+                      UsersAPI.follow(u.id).then((res) => {
+                        if (res.data.resultCode === 0) {
+                          props.follow(u.id);
+                        }
+                      });
                     }}
                   >
                     Unfollow

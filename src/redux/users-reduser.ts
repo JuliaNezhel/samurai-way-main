@@ -1,10 +1,10 @@
 export type UserType = {
-  id: string;
+  id: number;
   name: string;
   photos: PhotosUsersType;
   status: string;
   followed: boolean;
-  uniqueUrlName: null;
+  uniqueUrlName: any;
   // location: {
   //   city: string;
   //   country: string;
@@ -63,7 +63,7 @@ export const usersReduser = (
       return { ...state, totalCount: action.totalCount };
     }
     case "TOGGLE-IS-FETCHING": {
-      return {...state, isFetching: action.iIsFetching}
+      return { ...state, isFetching: action.iIsFetching };
     }
 
     default:
@@ -92,13 +92,13 @@ export const setUsersAC = (users: UserType[]) =>
     users,
   } as const);
 
-export const followAC = (userID: string) =>
+export const followAC = (userID: number) =>
   ({
     type: "FOLLOW",
     userID,
   } as const);
 
-export const unFollowAC = (userID: string) =>
+export const unFollowAC = (userID: number) =>
   ({
     type: "UNFOLLOW",
     userID,

@@ -5,7 +5,6 @@ import plus from "../../../assets/image/plus.jpg";
 import minus from "../../../assets/image/minus.jpg";
 
 export const ProfileInfo = (props: { profile: ProfileType }) => {
-  console.log(props.profile);
   if (!props.profile) {
     return <Preloader />;
   }

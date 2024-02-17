@@ -1,4 +1,4 @@
-import { AuthResponseType } from "../components/header/api/apiType";
+import { AuthResponseType } from "../components/header/api/api";
 
 //type
 type AuthType = {
