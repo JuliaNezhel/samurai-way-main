@@ -14,6 +14,8 @@ type UType = {
   follow: (userId: number) => void;
   unFollow: (userId: number) => void;
   isFetching?: any;
+  toggIsFollowingProgress: (isFollowingProgress: boolean, u: number) => void;
+  followingInProgress: number[];
 };
 
 export const Users = (props: UType) => {
@@ -23,6 +25,8 @@ export const Users = (props: UType) => {
   for (let i = 1; i <= pageCount; i++) {
     pages.push(i);
   }
+
+  console.log(props.followingInProgress);
   return (
     <section className={s.container}>
       <div className={s.pages}>
@@ -56,11 +60,16 @@ export const Users = (props: UType) => {
               <div>
                 {u.followed ? (
                   <button
+                    disabled={props.followingInProgress.some(
+                      (id) => id === u.id
+                    )}
                     onClick={() => {
+                      props.toggIsFollowingProgress(true, u.id);
                       UsersAPI.unfollow(u.id).then((res) => {
                         if (res.data.resultCode === 0) {
                           props.unFollow(u.id);
                         }
+                        props.toggIsFollowingProgress(false, u.id);
                       });
                     }}
                   >
@@ -68,11 +77,16 @@ export const Users = (props: UType) => {
                   </button>
                 ) : (
                   <button
+                    disabled={props.followingInProgress.some(
+                      (id) => id === u.id
+                    )}
                     onClick={() => {
+                      props.toggIsFollowingProgress(true, u.id);
                       UsersAPI.follow(u.id).then((res) => {
                         if (res.data.resultCode === 0) {
                           props.follow(u.id);
                         }
+                        props.toggIsFollowingProgress(false, u.id);
                       });
                     }}
                   >

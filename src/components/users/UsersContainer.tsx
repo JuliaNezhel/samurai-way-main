@@ -6,26 +6,19 @@ import {
   setCurrentPageAC,
   setTotalCountAC,
   setUsersAC,
+  toggIsFollowingProgressAC,
   toggleIsFetchingAC,
 } from "../../redux/users-reduser";
 import { unFollowAC } from "./../../redux/users-reduser";
 import { AppStateType } from "../../redux/redux-store";
 import { Dispatch } from "redux";
 import { Users } from "./Users";
-import axios from "axios";
 import { Preloader } from "../common/Loader";
 import { UsersAPI } from "../header/api/api";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
-type MapDispatchToPropsType = {
-  follow: (userId: number) => void;
-  unFollow: (userId: number) => void;
-  setUsers: (users: UserType[]) => void;
-  setCurrentPage: (pageNumder: number) => void;
-  setTotalCount: (totalCount: number) => void;
-  toggleIsFetching: (iIsFetching: boolean) => void;
-};
+type MapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>;
 
 export type UsersPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
@@ -59,6 +52,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
           <Preloader />
         ) : (
           <Users
+            {...this.props}
             totalCount={this.props.totalCount}
             pageSize={this.props.pageSize}
             carrentPage={this.props.currentPage}
@@ -80,10 +74,11 @@ let mapStateToProps = (state: AppStateType) => {
     totalCount: state.usersPage.totalCount,
     currentPage: state.usersPage.carrenstPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     follow: (userId: number) => {
       dispatch(followAC(userId));
@@ -100,6 +95,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
       dispatch(setTotalCountAC(totalCount)),
     toggleIsFetching: (iIsFetching: boolean) =>
       dispatch(toggleIsFetchingAC(iIsFetching)),
+    toggIsFollowingProgress: (isFollowingProgress: boolean, userID: number) =>
+      dispatch(toggIsFollowingProgressAC(isFollowingProgress, userID)),
   };
 };
 
