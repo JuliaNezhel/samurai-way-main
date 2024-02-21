@@ -18,7 +18,11 @@ export const ProfileInfo = (props: { profile: ProfileType }) => {
         ></img>
       </div>
       <div className={s.deckriptionBlok}>
-        <img src={props.profile?.photos?.large} className={s.profileIMG} />
+        {props.profile?.photos?.large === null ? (
+          null
+        ) : (
+          <img src={props.profile?.photos?.large} className={s.profileIMG} />
+        )}
         <div>{props.profile.aboutMe}</div>
         <div>
           Поиск работы -

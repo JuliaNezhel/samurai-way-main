@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { AuthResponseType, authAPI } from "../components/header/api/api";
+import { AuthResponseType, authAPI } from "../api/api";
 
 //type
 type AuthType = {

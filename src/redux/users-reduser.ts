@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { UsersAPI } from "../components/header/api/api";
+import { UsersAPI } from "../api/api";
 
 export type UserType = {
   id: number;

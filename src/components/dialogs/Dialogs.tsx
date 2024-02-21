@@ -1,3 +1,4 @@
+import { Redirect } from "react-router-dom";
 import { DialogsPagesType } from "../../redux/dialogs-reduser";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./gialogItem/DialogItem";
@@ -8,11 +9,10 @@ type DialogsPropsType = {
   // dispatch: (action: DispatchActionsTypes) => void
   updateNewMessageBody: (a: any) => void;
   onSendMessageClick: () => void;
+  isAuth: boolean;
 };
 
 export const Dialogs = (props: DialogsPropsType) => {
-
-
   const dialogsElement = props.state.dialogs.map((dialog) => (
     <DialogItem id={dialog.id} name={dialog.name} />
   ));
@@ -21,16 +21,18 @@ export const Dialogs = (props: DialogsPropsType) => {
   ));
 
   const sentMessage = () => {
-    // if (props.state.newMessagesText.trim() !== '') {
-    //     props.dispatch(sendMessageAC())
-    // }
-    props.onSendMessageClick();
+    if (props.state.newMessagesText.trim() !== "") {
+      props.onSendMessageClick();
+    }
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     props.updateNewMessageBody(event.currentTarget.value);
-    // props.dispatch(updateNewMwssageAC(event.currentTarget.value))
   };
+
+  if (!props.isAuth) {
+    return <Redirect to={'/login'}/>
+  }
 
   return (
     <section className={s.dialogs}>

@@ -1,8 +1,8 @@
 import React from "react";
-import { Header } from "./Header";
 import { connect } from "react-redux";
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { getAuthUserData } from "../../redux/auth-reduser";
+import { Header } from "./Header";
 
 //type
 type PropsType = OnPropsType;

@@ -8,7 +8,8 @@ import { DialogsContainer } from "./components/dialogs/DialogsContainer";
 import { AppStateType } from "./redux/redux-store";
 import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
-import HeaderContainer from "./components/header/HeaderContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import { Login } from "./components/Login/Login";
 
 type AppPropsType = {
   state: AppStateType;
@@ -20,7 +21,6 @@ function App(props: AppPropsType) {
       <HeaderContainer />
       <Navbar state={props.state.sideBar} />
       <div className="app-wrapper-content">
-        {/* <Routes> */}
         <Route
           exact
           path="/profile/:userId?"
@@ -30,7 +30,7 @@ function App(props: AppPropsType) {
         <Route exact path="/news" render={() => <News />} />
         <Route exact path="/users" render={() => <UsersContainer />} />
         <Route exact path="/Setting" render={() => <Setting />} />
-        {/* </Routes> */}
+        <Route exact path="/login" render={() => <Login />} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { v1 } from "uuid";
-import { UsersAPI } from "../components/header/api/api";
+import { UsersAPI } from "../api/api";
 
 export type MyPostsType = {
   id: string;
@@ -27,8 +27,8 @@ export type ProfileType = {
   fullName: string;
   userId: number;
   photos: {
-    small: string;
-    large: string;
+    small: string | null;
+    large: string | null;
   };
 };
 
