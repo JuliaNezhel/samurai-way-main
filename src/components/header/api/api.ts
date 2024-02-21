@@ -19,10 +19,13 @@ export const UsersAPI = {
   unfollow: (userID: number) => {
     return instanse.delete(`follow/${userID}`);
   },
+  getUserProfile: (userID: string) => {
+    return instanse.get(`profile/${userID}`);
+  },
 };
 
 export const authAPI = {
-  getMe: () => {
+  me: () => {
     return instanse.get<ResponsrType<AuthResponseType>>("auth/me");
   },
 };
@@ -59,3 +62,4 @@ export type AuthResponseType = {
   login: string;
   email: string;
 };
+

@@ -1,4 +1,6 @@
+import { Dispatch } from "redux";
 import { v1 } from "uuid";
+import { UsersAPI } from "../components/header/api/api";
 
 export type MyPostsType = {
   id: string;
@@ -101,3 +103,9 @@ export const setUserProfileAC = (propfile: ProfileType) =>
     type: "SET-USER-PROFILE",
     propfile,
   } as const);
+
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+  UsersAPI.getUserProfile(userId).then((res) => {
+    dispatch(setUserProfileAC(res.data));
+  });
+};

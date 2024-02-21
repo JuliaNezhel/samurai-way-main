@@ -2,7 +2,7 @@ import React from "react";
 import { Header } from "./Header";
 import { connect } from "react-redux";
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
-import { setUserData } from "../../redux/auth-reduser";
+import { getAuthUserData } from "../../redux/auth-reduser";
 
 //type
 type PropsType = OnPropsType;
@@ -14,7 +14,7 @@ type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
 class HeaderContainer extends React.Component<PropsType> {
   componentDidMount(): void {
-    this.props.setUserData();
+    this.props.getAuthUserData();
   }
 
   render(): React.ReactNode {
@@ -35,7 +35,7 @@ let mapStateToProps = (state: AppStateType) => {
 
 const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
   return {
-    setUserData: () => dispatch(setUserData()),
+    getAuthUserData: () => dispatch(getAuthUserData()),
   };
 };
 
