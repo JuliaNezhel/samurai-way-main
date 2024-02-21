@@ -8,23 +8,24 @@ const instanse = axios.create({
 export const UsersAPI = {
   getUsers: (currentPage: number = 1, pageSize: number = 10) => {
     return instanse
-    .get(`users?page=${pageSize}&count=${currentPage}`)
-    .then((res) => {
-      return res.data;
-    });
+      .get(`users?page=${pageSize}&count=${currentPage}`)
+      .then((res) => {
+        return res.data;
+      });
   },
   follow: (userID: number) => {
-    return instanse.post(
-      `follow/${userID}`, null 
-    )
+    return instanse.post(`follow/${userID}`, null);
   },
   unfollow: (userID: number) => {
-    return instanse.delete(
-      `follow/${userID}` 
-    )
-  }
-}
+    return instanse.delete(`follow/${userID}`);
+  },
+};
 
+export const authAPI = {
+  getMe: () => {
+    return instanse.get<ResponsrType<AuthResponseType>>("auth/me");
+  },
+};
 
 //type
 

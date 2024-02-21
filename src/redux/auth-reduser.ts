@@ -1,4 +1,6 @@
-import { AuthResponseType } from "../components/header/api/api";
+import { Dispatch } from "redux";
+import { AuthResponseType, authAPI } from "../components/header/api/api";
+import { AppThunkDispatch } from "./redux-store";
 
 //type
 type AuthType = {
@@ -32,4 +34,12 @@ export const setUserDataAC = (data: AuthResponseType) => {
     type: "SET-USER-DATA",
     data,
   } as const;
+};
+
+export const setUserData = () => (dispatch: Dispatch) => {
+  authAPI.getMe().then((res) => {
+    if (res.data.resultCode === 0) {
+      dispatch(setUserDataAC(res.data.data));
+    }
+  });
 };

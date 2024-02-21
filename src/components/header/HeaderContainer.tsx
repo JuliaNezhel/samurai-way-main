@@ -1,11 +1,8 @@
 import React from "react";
 import { Header } from "./Header";
-import axios from "axios";
 import { connect } from "react-redux";
-import { AppStateType } from "../../redux/redux-store";
-import { Dispatch } from "redux";
-import { AuthResponseType, ResponsrType } from "./api/api";
-import { setUserDataAC } from "../../redux/auth-reduser";
+import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
+import { setUserData } from "../../redux/auth-reduser";
 
 //type
 type PropsType = OnPropsType;
@@ -17,16 +14,7 @@ type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
 class HeaderContainer extends React.Component<PropsType> {
   componentDidMount(): void {
-    axios
-      .get<ResponsrType<AuthResponseType>>(
-        `https://social-network.samuraijs.com/api/1.0//auth/me`,
-        { withCredentials: true }
-      )
-      .then((res) => {
-        if (res.data.resultCode === 0) {
-          this.props.setUserData(res.data.data);
-        }
-      });
+    this.props.setUserData();
   }
 
   render(): React.ReactNode {
@@ -45,9 +33,9 @@ let mapStateToProps = (state: AppStateType) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
   return {
-    setUserData: (data: AuthResponseType) => dispatch(setUserDataAC(data)),
+    setUserData: () => dispatch(setUserData()),
   };
 };
 

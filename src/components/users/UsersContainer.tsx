@@ -1,20 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  UserType,
-  followAC,
+  follow,
+  getUsers,
   setCurrentPageAC,
-  setTotalCountAC,
-  setUsersAC,
   toggIsFollowingProgressAC,
-  toggleIsFetchingAC,
+  unfollow,
 } from "../../redux/users-reduser";
-import { unFollowAC } from "./../../redux/users-reduser";
-import { AppStateType } from "../../redux/redux-store";
-import { Dispatch } from "redux";
+import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { Users } from "./Users";
 import { Preloader } from "../common/Loader";
-import { UsersAPI } from "../header/api/api";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
@@ -28,21 +23,11 @@ class UsersContainer extends React.Component<UsersPropsType> {
   }
 
   componentDidMount(): void {
-    UsersAPI.getUsers(this.props.pageSize, this.props.currentPage).then(
-      (data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
-      }
-    );
+    this.props.getUsers(this.props.pageSize, this.props.currentPage);
   }
 
   onPageChanged = (pageNumber: number) => {
-    this.props.setCurrentPage(pageNumber);
-    UsersAPI.getUsers(this.props.pageSize, pageNumber).then((data) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsers(this.props.pageSize, pageNumber);
   };
 
   render(): React.ReactNode {
@@ -78,25 +63,20 @@ let mapStateToProps = (state: AppStateType) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
   return {
     follow: (userId: number) => {
-      dispatch(followAC(userId));
+      dispatch(follow(userId));
     },
     unFollow: (userId: number) => {
-      dispatch(unFollowAC(userId));
-    },
-    setUsers: (users: UserType[]) => {
-      dispatch(setUsersAC(users));
+      dispatch(unfollow(userId));
     },
     setCurrentPage: (pageNumder: number) =>
       dispatch(setCurrentPageAC(pageNumder)),
-    setTotalCount: (totalCount: number) =>
-      dispatch(setTotalCountAC(totalCount)),
-    toggleIsFetching: (iIsFetching: boolean) =>
-      dispatch(toggleIsFetchingAC(iIsFetching)),
     toggIsFollowingProgress: (isFollowingProgress: boolean, userID: number) =>
       dispatch(toggIsFollowingProgressAC(isFollowingProgress, userID)),
+    getUsers: (pageSize: number, currentPage: number) =>
+      dispatch(getUsers(pageSize, currentPage)),
   };
 };
 

@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { UsersAPI } from "../components/header/api/api";
+
 export type UserType = {
   id: number;
   name: string;
@@ -142,4 +145,34 @@ export let toggIsFollowingProgressAC = (
     isFollowingProgress,
     userID,
   } as const;
+};
+
+export const getUsers =
+  (pageSize: number, currentPage: number) => (dispath: Dispatch) => {
+    dispath(toggleIsFetchingAC(true));
+    UsersAPI.getUsers(pageSize, currentPage).then((data) => {
+      dispath(toggleIsFetchingAC(false));
+      dispath(setUsersAC(data.items));
+      dispath(setTotalCountAC(data.totalCount));
+    });
+  };
+
+export const follow = (userID: number) => (dispath: Dispatch) => {
+  dispath(toggIsFollowingProgressAC(true, userID));
+  UsersAPI.follow(userID).then((res) => {
+    if (res.data.resultCode === 0) {
+      dispath(followAC(userID));
+    }
+    dispath(toggIsFollowingProgressAC(false, userID));
+  });
+};
+
+export const unfollow = (userID: number) => (dispath: Dispatch) => {
+  dispath(toggIsFollowingProgressAC(true, userID));
+  UsersAPI.unfollow(userID).then((res) => {
+    if (res.data.resultCode === 0) {
+      dispath(unFollowAC(userID));
+    }
+    dispath(toggIsFollowingProgressAC(false, userID));
+  });
 };

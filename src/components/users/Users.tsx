@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import avatar from "./../../assets/image/avatar.jpg";
 import { UserType } from "../../redux/users-reduser";
 import { NavLink } from "react-router-dom";
-import { UsersAPI } from "../header/api/api";
 
 type UType = {
   carrentPage: number;
@@ -26,7 +25,6 @@ export const Users = (props: UType) => {
     pages.push(i);
   }
 
-  console.log(props.followingInProgress);
   return (
     <section className={s.container}>
       <div className={s.pages}>
@@ -64,13 +62,7 @@ export const Users = (props: UType) => {
                       (id) => id === u.id
                     )}
                     onClick={() => {
-                      props.toggIsFollowingProgress(true, u.id);
-                      UsersAPI.unfollow(u.id).then((res) => {
-                        if (res.data.resultCode === 0) {
-                          props.unFollow(u.id);
-                        }
-                        props.toggIsFollowingProgress(false, u.id);
-                      });
+                      props.unFollow(u.id);
                     }}
                   >
                     Follow
@@ -81,13 +73,7 @@ export const Users = (props: UType) => {
                       (id) => id === u.id
                     )}
                     onClick={() => {
-                      props.toggIsFollowingProgress(true, u.id);
-                      UsersAPI.follow(u.id).then((res) => {
-                        if (res.data.resultCode === 0) {
-                          props.follow(u.id);
-                        }
-                        props.toggIsFollowingProgress(false, u.id);
-                      });
+                      props.follow(u.id);
                     }}
                   >
                     Unfollow
