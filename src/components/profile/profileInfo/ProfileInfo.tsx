@@ -3,6 +3,7 @@ import { Preloader } from "../../common/Loader";
 import s from "./ProfileInfo.module.css";
 import plus from "../../../assets/image/plus.jpg";
 import minus from "../../../assets/image/minus.jpg";
+import { ProfileStaus } from "./ProfileStaus";
 
 export const ProfileInfo = (props: { profile: ProfileType }) => {
   if (!props.profile) {
@@ -18,11 +19,10 @@ export const ProfileInfo = (props: { profile: ProfileType }) => {
         ></img>
       </div>
       <div className={s.deckriptionBlok}>
-        {props.profile?.photos?.large === null ? (
-          null
-        ) : (
+        {props.profile?.photos?.large === null ? null : (
           <img src={props.profile?.photos?.large} className={s.profileIMG} />
         )}
+        <ProfileStaus status="dchbsdiyfozuygfv" />
         <div>{props.profile.aboutMe}</div>
         <div>
           Поиск работы -
