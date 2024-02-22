@@ -6,10 +6,8 @@ import { Message } from "./message/Message";
 
 type DialogsPropsType = {
   state: DialogsPagesType;
-  // dispatch: (action: DispatchActionsTypes) => void
   updateNewMessageBody: (a: any) => void;
   onSendMessageClick: () => void;
-  isAuth: boolean;
 };
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -30,9 +28,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     props.updateNewMessageBody(event.currentTarget.value);
   };
 
-  if (!props.isAuth) {
-    return <Redirect to={'/login'}/>
-  }
 
   return (
     <section className={s.dialogs}>

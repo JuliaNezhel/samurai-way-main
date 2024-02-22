@@ -12,16 +12,16 @@ import { authReduser } from "./auth-reduser";
 import thunkMiddleware, { ThunkDispatch } from "redux-thunk";
 import { useDispatch } from "react-redux";
 
-let reducers = combineReducers({
+let reducer = combineReducers({
   profilePage: profileReduser,
   dialogsPage: dialogsReduser,
   sideBar: sideBarReduser,
   usersPage: usersReduser,
   auth: authReduser,
 });
-export type AppStateType = ReturnType<typeof reducers>;
+export type AppStateType = ReturnType<typeof reducer>;
 
-export let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+export let store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AnyAction>;
 

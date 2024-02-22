@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./Users.module.css";
 import avatar from "./../../assets/image/avatar.jpg";
 import { UserType } from "../../redux/users-reduser";
@@ -20,15 +20,22 @@ type UType = {
 export const Users = (props: UType) => {
   let pageCount = Math.ceil(props.totalCount / props.pageSize);
 
-  let pages = [];
+  let pages: number[] = [];
   for (let i = 1; i <= pageCount; i++) {
     pages.push(i);
   }
 
+  let [startIndexSl, setIndex] = useState(0);
+  let [endIndexSl, setEndIndex] = useState(10);
+
+  const pageSize = 10; // Количество кнопок пагинации, которые вы хотите отобразить одновременно
+  const startIndex = (startIndexSl - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, pages.length);
+
   return (
     <section className={s.container}>
       <div className={s.pages}>
-        {pages.map((p) => {
+        {pages.slice(startIndexSl, endIndexSl).map((p) => {
           return (
             <span
               key={p}
@@ -41,6 +48,17 @@ export const Users = (props: UType) => {
             </span>
           );
         })}
+        {endIndex < pages.length && <span className={s.ellipsis} >...</span>}
+        {endIndex < pages.length && (
+          <span
+            className={s.page}
+            onClick={() => {
+              props.onPageChanged(pages.length);
+            }}
+          >
+            {pages.length}
+          </span>
+        )}
       </div>
 
       {props.users.map((u) => {

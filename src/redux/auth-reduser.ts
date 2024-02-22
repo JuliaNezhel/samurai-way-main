@@ -16,6 +16,7 @@ const inintialState: AuthType = {
   email: null,
   isAuth: false,
 };
+
 export const authReduser = (
   state: AuthType = inintialState,
   action: AuthActionType
@@ -28,6 +29,7 @@ export const authReduser = (
   }
 };
 
+// Action
 export const setUserDataAC = (data: AuthResponseType) => {
   return {
     type: "SET-USER-DATA",
@@ -35,6 +37,7 @@ export const setUserDataAC = (data: AuthResponseType) => {
   } as const;
 };
 
+//Thunk
 export const getAuthUserData = () => (dispatch: Dispatch) => {
   authAPI.me().then((res) => {
     if (res.data.resultCode === 0) {
