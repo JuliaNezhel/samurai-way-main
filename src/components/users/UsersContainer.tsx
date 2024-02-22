@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import { connect } from "react-redux";
 import {
   follow,
@@ -10,6 +10,8 @@ import {
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { Users } from "./Users";
 import { Preloader } from "../common/Loader";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>;
 
@@ -80,4 +82,7 @@ const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose<ComponentType>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer);
