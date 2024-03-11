@@ -3,8 +3,8 @@ import s from "./Profile.module.css";
 import { Profile } from "./Profile";
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { connect } from "react-redux";
-import { getUserProfile } from "../../redux/profile-reduser";
-import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+import { getStatus, getUserProfile, updateStatus } from "../../redux/profile-reduser";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
@@ -22,15 +22,16 @@ class ProfileContainer extends React.Component<PropsType> {
   componentDidMount(): void {
     let userId = this.props.match?.params?.userId;
     if (!userId) {
-      userId = "2";
+      userId = "30458";
     }
     this.props.setUserProfile(userId);
+    this.props.getUserStatus(userId)
   }
 
   render() {
     return (
       <div className={s.content}>
-        <Profile {...this.props} profile={this.props.profile} />
+        <Profile {...this.props} profile={this.props.profile}  status={this.props.status}  updateStatus={this.props.updateStatus}/>
       </div>
     );
   }
@@ -40,12 +41,15 @@ class ProfileContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType) => {
   return {
     profile: state.profilePage.profile,
+    status: state.profilePage.status
   };
 };
 
 const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
   return {
     setUserProfile: (userId: string) => dispatch(getUserProfile(userId)),
+    getUserStatus: (userId: string)=> dispatch(getStatus(userId)),
+    updateStatus: (status: any)=> dispatch(updateStatus(status))
   };
 };
 

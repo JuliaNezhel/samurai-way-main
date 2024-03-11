@@ -169,7 +169,7 @@ export const follow = (userID: number) => (dispath: Dispatch) => {
 
 export const unfollow = (userID: number) => (dispath: Dispatch) => {
   dispath(toggIsFollowingProgressAC(true, userID));
-  UsersAPI.unfollow(userID).then((res) => {
+  UsersAPI.unFollow(userID).then((res) => {
     if (res.data.resultCode === 0) {
       dispath(unFollowAC(userID));
     }

@@ -3,26 +3,29 @@ import { Preloader } from "../../common/Loader";
 import s from "./ProfileInfo.module.css";
 import plus from "../../../assets/image/plus.jpg";
 import minus from "../../../assets/image/minus.jpg";
-import { ProfileStaus } from "./ProfileStaus";
+import { ProfileStatus } from "./ProfileStaus";
 
-export const ProfileInfo = (props: { profile: ProfileType }) => {
+type ProfileInfo = {
+  profile: ProfileType;
+  status: string;
+  updateStatus: (status: string) => void;
+};
+
+export const ProfileInfo = (props: ProfileInfo) => {
   if (!props.profile) {
     return <Preloader />;
   }
 
   return (
     <div className={s.content}>
-      <div className={s.containerImg}>
-        <img
-          src="https://w-dog.ru/wallpapers/10/0/536091371634844/krasivyj-vodopad-vodopad-tropiki-yarkon-solnce-krasivoe-nebo-oblaka-raj.jpg"
-          className={s.contentIMG}
-        ></img>
-      </div>
-      <div className={s.deckriptionBlok}>
+      <div className={s.descriptionBlok}>
         {props.profile?.photos?.large === null ? null : (
           <img src={props.profile?.photos?.large} className={s.profileIMG} />
         )}
-        <ProfileStaus status="dchbsdiyfozuygfv" />
+        <ProfileStatus
+          status={props.status}
+          updateStatus={props.updateStatus}
+        />
         <div>{props.profile.aboutMe}</div>
         <div>
           Поиск работы -

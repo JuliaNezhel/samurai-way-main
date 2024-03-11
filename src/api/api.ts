@@ -1,32 +1,49 @@
 import axios from "axios";
 
-const instanse = axios.create({
+const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   withCredentials: true,
+  headers: {
+    "API-KEY": "0d0c2965-64f0-4b40-a52d-afe190fd7ea7",
+  },
 });
 
 export const UsersAPI = {
   getUsers: (currentPage: number = 1, pageSize: number = 10) => {
-    return instanse
+    return instance
       .get(`users?page=${pageSize}&count=${currentPage}`)
       .then((res) => {
         return res.data;
       });
   },
   follow: (userID: number) => {
-    return instanse.post(`follow/${userID}`, null);
+    return instance.post(`follow/${userID}`, null);
   },
-  unfollow: (userID: number) => {
-    return instanse.delete(`follow/${userID}`);
+  unFollow: (userID: number) => {
+    return instance.delete(`follow/${userID}`);
   },
   getUserProfile: (userID: string) => {
-    return instanse.get(`profile/${userID}`);
+    console.warn("старый метод что надо менять");
+    return profileAPI.getUserProfile(userID);
   },
+};
+
+export const profileAPI = {
+  getUserProfile: (userID: string) => {
+    return instance.get(`profile/${userID}`);
+  },
+  getStatus(userID: string) {
+    return instance.get(`/profile/status/${userID}`);
+  },
+  updateStatus: (status: any) => {
+    return instance.put("/profile/status", status)
+
+  }
 };
 
 export const authAPI = {
   me: () => {
-    return instanse.get<ResponsrType<AuthResponseType>>("auth/me");
+    return instance.get<ResponseType<AuthResponseType>>("auth/me");
   },
 };
 
@@ -50,7 +67,7 @@ type UsersGetItemType = {
   followed: boolean;
 };
 
-export type ResponsrType<T> = {
+export type ResponseType<T> = {
   data: T;
   messages: string[];
   fieldsErrors: string[];
@@ -62,4 +79,3 @@ export type AuthResponseType = {
   login: string;
   email: string;
 };
-
