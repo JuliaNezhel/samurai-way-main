@@ -49,7 +49,6 @@ let initialState = {
       likeCount: 24,
     },
   ],
-  newPostText: "g",
   profile: {} as ProfileType,
   status: "",
 };
@@ -62,15 +61,12 @@ export const profileReducer = (
     case "ADD-POST": {
       const newPost: MyPostsType = {
         id: v1(),
-        message: state.newPostText,
+        message: action.newPost,
         imgSrc:
           "https://w.forfun.com/fetch/fe/fe22186dba2df35f07573604aa8a0e63.jpeg?w=1470&r=0.5625",
         likeCount: 34,
       };
-      return { ...state, posts: [...state.posts, newPost], newPostText: "" };
-    }
-    case "UPDATE-NEW-POST-TEXT": {
-      return { ...state, newPostText: action.newPost };
+      return { ...state, posts: [...state.posts, newPost],  };
     }
     case "SET-USER-PROFILE":
       return { ...state, profile: action.profile };
@@ -83,26 +79,20 @@ export const profileReducer = (
 
 export type ProfileACType =
   | AddPostActionACType
-  | UpdateNewPostTextActionACType
   | SetUserProfileType
   | ReturnType<typeof setStatusAC>;
 
 type AddPostActionACType = ReturnType<typeof addPostAC>;
-type UpdateNewPostTextActionACType = ReturnType<typeof updateNewPostTextAC>;
 type SetUserProfileType = ReturnType<typeof setUserProfileAC>;
 
 //actions
 
-export const addPostAC = () =>
+export const addPostAC = (newPost: string) =>
   ({
     type: "ADD-POST",
+    newPost
   } as const);
 
-export const updateNewPostTextAC = (newPost: string) =>
-  ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newPost,
-  } as const);
 
 export const setUserProfileAC = (profile: ProfileType) =>
   ({

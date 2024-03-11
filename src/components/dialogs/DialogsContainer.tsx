@@ -1,5 +1,4 @@
-import { Redirect } from "react-router-dom";
-import { sendMessageAC, updateNewMessageAC } from "../../redux/dialogs-reducer";
+import { sendMessageAC } from "../../redux/dialogs-reducer";
 import { AppStateType } from "../../redux/redux-store";
 import { Dialogs } from "./Dialogs";
 import { connect } from "react-redux";
@@ -16,18 +15,13 @@ const mapStateToProps = (state: AppStateType) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateNewMessageBody: (body: any) => {
-      dispatch(updateNewMessageAC(body));
-    },
-    onSendMessageClick: () => {
-      dispatch(sendMessageAC());
+    onSendMessageClick: (newMessage:string) => {
+      dispatch(sendMessageAC(newMessage));
     },
   };
 };
 
 
-
-// let AuthRedirectComponent = withAuthRedirect();
 
 export const DialogsContainer =  compose<ComponentType>(
   connect(    mapStateToProps,    mapDispatchToProps  ),
