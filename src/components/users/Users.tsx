@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import s from "./Users.module.css";
 import avatar from "./../../assets/image/avatar.jpg";
-import { UserType } from "../../redux/users-reduser";
+import { UserType } from "../../redux/users-reducer";
 import { NavLink } from "react-router-dom";
 
 type UType = {
-  carrentPage: number;
+  currentPage: number;
   totalCount: number;
   pageSize: number;
   onPageChanged: (p: number) => void;
@@ -13,7 +13,7 @@ type UType = {
   follow: (userId: number) => void;
   unFollow: (userId: number) => void;
   isFetching?: any;
-  toggIsFollowingProgress: (isFollowingProgress: boolean, u: number) => void;
+  toggleIsFollowingProgress: (isFollowingProgress: boolean, u: number) => void;
   followingInProgress: number[];
 };
 
@@ -39,7 +39,7 @@ export const Users = (props: UType) => {
           return (
             <span
               key={p}
-              className={props.carrentPage === p ? s.selectedPage : ""}
+              className={props.currentPage === p ? s.selectedPage : ""}
               onClick={() => {
                 props.onPageChanged(p);
               }}

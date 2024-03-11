@@ -1,5 +1,5 @@
 import { Redirect } from "react-router-dom";
-import { sendMessageAC, updateNewMessageAC } from "../../redux/dialogs-reduser";
+import { sendMessageAC, updateNewMessageAC } from "../../redux/dialogs-reducer";
 import { AppStateType } from "../../redux/redux-store";
 import { Dialogs } from "./Dialogs";
 import { connect } from "react-redux";

@@ -5,7 +5,7 @@ import { AppStateType } from "../redux/redux-store";
 
 type MapStateToProp = { isAuth: boolean };
 
-const mapStatetoProps = (state: AppStateType): MapStateToProp => {
+const mapStateToProps = (state: AppStateType): MapStateToProp => {
   return {
     isAuth: state.auth.isAuth,
   };
@@ -19,6 +19,6 @@ export function withAuthRedirect<T>(Component: ComponentType<T>) {
     return <Component {...(restProps as T & {})} />;
   };
 
-  let ConnectedRedirectComponent = connect(mapStatetoProps)(RedirectComponent);
+  let ConnectedRedirectComponent = connect(mapStateToProps)(RedirectComponent);
   return ConnectedRedirectComponent;
 }

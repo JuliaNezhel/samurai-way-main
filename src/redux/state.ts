@@ -1,5 +1,5 @@
-import { dialogsReduser, DialogsReduserActionType } from "./dialogs-reduser";
-import { ProfileACType, profileReduser } from "./profile-reduser";
+import { DialogsReducerActionType } from "./dialogs-reducer";
+import { ProfileACType } from "./profile-reducer";
 
 type StoreType = {
   _state: StatePagesType;
@@ -50,7 +50,7 @@ type SideBarDateType = {
   name: string;
   id: number;
 };
-export type DispatchActionsTypes = ProfileACType | DialogsReduserActionType;
+export type DispatchActionsTypes = ProfileACType | DialogsReducerActionType;
 
 const store: StoreType = {
   _state: {

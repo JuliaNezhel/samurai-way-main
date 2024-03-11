@@ -1,41 +1,41 @@
 import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css";
 import { SideBar } from "./sideBar/SideBar";
-import { SideBarPageType } from "../../redux/sideBar-reduser";
+import { SideBarPageType } from "../../redux/sideBar-reducer";
 
-type NavbarPropstype = {
+type NavbarPropsType = {
   state: SideBarPageType;
 };
 
-export const Navbar = (props: NavbarPropstype) => {
-  const activClss = (param: any) => (param.isActive ? s.active : "");
+export const Navbar = (props: NavbarPropsType) => {
+  const activeClass = (param: any) => (param.isActive ? s.active : "");
 
   return (
     <nav className={s.nav}>
       <ul>
         <li className={s.item}>
-          <NavLink to="/profile" className={activClss}>
+          <NavLink to="/profile" className={activeClass}>
             Profile
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/dialog" className={activClss}>
+          <NavLink to="/dialog" className={activeClass}>
             Messages
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/news" className={activClss}>
+          <NavLink to="/news" className={activeClass}>
             {" "}
             News
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/users" className={activClss}>
+          <NavLink to="/users" className={activeClass}>
             Users
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink to="/setting" className={activClss}>
+          <NavLink to="/setting" className={activeClass}>
             Setting
           </NavLink>
         </li>

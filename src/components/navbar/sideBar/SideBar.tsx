@@ -1,4 +1,4 @@
-import { SideBarPageType } from "../../../redux/sideBar-reduser";
+import { SideBarPageType } from "../../../redux/sideBar-reducer";
 
 type SideBarPropsType = {
   sideBarDate: SideBarPageType;

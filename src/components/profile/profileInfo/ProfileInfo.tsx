@@ -1,9 +1,9 @@
-import { ProfileType } from "../../../redux/profile-reduser";
+import { ProfileType } from "../../../redux/profile-reducer";
 import { Preloader } from "../../common/Loader";
 import s from "./ProfileInfo.module.css";
 import plus from "../../../assets/image/plus.jpg";
 import minus from "../../../assets/image/minus.jpg";
-import { ProfileStatus } from "./ProfileStaus";
+import { ProfileStatus } from "./ProfileStatus";
 
 type ProfileInfo = {
   profile: ProfileType;

@@ -23,14 +23,14 @@ let initialState = {
   users: [] as UserType[],
   pageSize: 100,
   totalCount: 50,
-  carrenstPage: 1,
+  currentsPage: 1,
   isFetching: true,
   followingInProgress: [] as number[],
 };
 
 export type UsersPageType = typeof initialState;
 
-export const usersReduser = (
+export const usersReducer = (
   state: UsersPageType = initialState,
   action: UsersACType
 ): UsersPageType => {
@@ -61,7 +61,7 @@ export const usersReduser = (
       return { ...state, users: action.users };
     }
     case "SET-CURRENT-PAGE": {
-      return { ...state, carrenstPage: action.currentPage };
+      return { ...state, currentsPage: action.currentPage };
     }
     case "SET-TOTAL-COUNT": {
       return { ...state, totalCount: action.totalCount };
@@ -89,7 +89,7 @@ export type UsersACType =
   | SetCurrentPageType
   | SetTotalCountType
   | ToggleIsFetchingType
-  | ReturnType<typeof toggIsFollowingProgressAC>;
+  | ReturnType<typeof toggleIsFollowingProgressAC>;
 
 type FollowACType = ReturnType<typeof followAC>;
 type UnFollowACType = ReturnType<typeof unFollowAC>;
@@ -136,7 +136,7 @@ export let toggleIsFetchingAC = (iIsFetching: boolean) => {
   } as const;
 };
 
-export let toggIsFollowingProgressAC = (
+export let toggleIsFollowingProgressAC = (
   isFollowingProgress: boolean,
   userID: number
 ) => {
@@ -148,31 +148,31 @@ export let toggIsFollowingProgressAC = (
 };
 
 export const getUsers =
-  (pageSize: number, currentPage: number) => (dispath: Dispatch) => {
-    dispath(toggleIsFetchingAC(true));
+  (pageSize: number, currentPage: number) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
     UsersAPI.getUsers(pageSize, currentPage).then((data) => {
-      dispath(toggleIsFetchingAC(false));
-      dispath(setUsersAC(data.items));
-      dispath(setTotalCountAC(data.totalCount));
+      dispatch(toggleIsFetchingAC(false));
+      dispatch(setUsersAC(data.items));
+      dispatch(setTotalCountAC(data.totalCount));
     });
   };
 
-export const follow = (userID: number) => (dispath: Dispatch) => {
-  dispath(toggIsFollowingProgressAC(true, userID));
+export const follow = (userID: number) => (dispatch: Dispatch) => {
+  dispatch(toggleIsFollowingProgressAC(true, userID));
   UsersAPI.follow(userID).then((res) => {
     if (res.data.resultCode === 0) {
-      dispath(followAC(userID));
+      dispatch(followAC(userID));
     }
-    dispath(toggIsFollowingProgressAC(false, userID));
+    dispatch(toggleIsFollowingProgressAC(false, userID));
   });
 };
 
-export const unfollow = (userID: number) => (dispath: Dispatch) => {
-  dispath(toggIsFollowingProgressAC(true, userID));
+export const unFollow = (userID: number) => (dispatch: Dispatch) => {
+  dispatch(toggleIsFollowingProgressAC(true, userID));
   UsersAPI.unFollow(userID).then((res) => {
     if (res.data.resultCode === 0) {
-      dispath(unFollowAC(userID));
+      dispatch(unFollowAC(userID));
     }
-    dispath(toggIsFollowingProgressAC(false, userID));
+    dispatch(toggleIsFollowingProgressAC(false, userID));
   });
 };

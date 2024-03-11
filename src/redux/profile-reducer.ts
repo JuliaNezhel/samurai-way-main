@@ -54,7 +54,7 @@ let initialState = {
   status: "",
 };
 
-export const profileReduser = (
+export const profileReducer = (
   state: ProfilePageType = initialState,
   action: ProfileACType
 ): ProfilePageType => {

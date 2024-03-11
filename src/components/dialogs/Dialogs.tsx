@@ -1,7 +1,7 @@
 import { Redirect } from "react-router-dom";
-import { DialogsPagesType } from "../../redux/dialogs-reduser";
+import { DialogsPagesType } from "../../redux/dialogs-reducer";
 import s from "./Dialogs.module.css";
-import { DialogItem } from "./gialogItem/DialogItem";
+import { DialogItem } from "./dialogItem/DialogItem";
 import { Message } from "./message/Message";
 
 type DialogsPropsType = {

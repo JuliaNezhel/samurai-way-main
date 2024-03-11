@@ -4,9 +4,9 @@ import {
   follow,
   getUsers,
   setCurrentPageAC,
-  toggIsFollowingProgressAC,
-  unfollow,
-} from "../../redux/users-reduser";
+  toggleIsFollowingProgressAC,
+  unFollow,
+} from "../../redux/users-reducer";
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { Users } from "./Users";
 import { Preloader } from "../common/Loader";
@@ -42,11 +42,12 @@ class UsersContainer extends React.Component<UsersPropsType> {
             {...this.props}
             totalCount={this.props.totalCount}
             pageSize={this.props.pageSize}
-            carrentPage={this.props.currentPage}
+            currentPage={this.props.currentPage}
             onPageChanged={this.onPageChanged}
             users={this.props.users}
             follow={this.props.follow}
             unFollow={this.props.unFollow}
+            toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
           />
         )}
       </>
@@ -59,7 +60,7 @@ let mapStateToProps = (state: AppStateType) => {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalCount: state.usersPage.totalCount,
-    currentPage: state.usersPage.carrenstPage,
+    currentPage: state.usersPage.currentsPage,
     isFetching: state.usersPage.isFetching,
     followingInProgress: state.usersPage.followingInProgress,
   };
@@ -71,12 +72,12 @@ const mapDispatchToProps = (dispatch: AppThunkDispatch) => {
       dispatch(follow(userId));
     },
     unFollow: (userId: number) => {
-      dispatch(unfollow(userId));
+      dispatch(unFollow(userId));
     },
-    setCurrentPage: (pageNumder: number) =>
-      dispatch(setCurrentPageAC(pageNumder)),
-    toggIsFollowingProgress: (isFollowingProgress: boolean, userID: number) =>
-      dispatch(toggIsFollowingProgressAC(isFollowingProgress, userID)),
+    setCurrentPage: (pageNumber: number) =>
+      dispatch(setCurrentPageAC(pageNumber)),
+    toggleIsFollowingProgress: (isFollowingProgress: boolean, userID: number) =>
+      dispatch(toggleIsFollowingProgressAC(isFollowingProgress, userID)),
     getUsers: (pageSize: number, currentPage: number) =>
       dispatch(getUsers(pageSize, currentPage)),
   };

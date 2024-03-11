@@ -8,7 +8,7 @@ let initialState = {
   ],
 };
 
-export const sideBarReduser = (
+export const sideBarReducer = (
   state: SideBarPageType = initialState,
   action: SideBarACType
 ): SideBarPageType => {

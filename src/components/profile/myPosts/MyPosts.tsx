@@ -1,7 +1,7 @@
 import s from "./MyPosts.module.css";
 import { Post } from "./post/Post";
 import React, { useRef } from "react";
-import { MyPostsType } from "../../../redux/profile-reduser";
+import { MyPostsType } from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
   updateNewPostText: any;

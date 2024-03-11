@@ -10,15 +10,15 @@ type AuthType = {
 };
 type AuthActionType = ReturnType<typeof setUserDataAC>;
 
-const inintialState: AuthType = {
+const initialState: AuthType = {
   id: null,
   login: null,
   email: null,
   isAuth: false,
 };
 
-export const authReduser = (
-  state: AuthType = inintialState,
+export const authReducer = (
+  state: AuthType = initialState,
   action: AuthActionType
 ): AuthType => {
   switch (action.type) {
