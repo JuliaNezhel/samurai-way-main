@@ -9,7 +9,7 @@ import {
 } from "../../redux/users-reducer";
 import { AppStateType, AppThunkDispatch } from "../../redux/redux-store";
 import { Users } from "./Users";
-import { Preloader } from "../common/Loader";
+import { Preloader } from "../common/preloader/Loader";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 

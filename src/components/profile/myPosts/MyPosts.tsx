@@ -1,11 +1,16 @@
 import s from "./MyPosts.module.css";
 import { Post } from "./post/Post";
-import React, { useRef } from "react";
+import React from "react";
 import { MyPostsType } from "../../../redux/profile-reducer";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import {
+  maxLengthCreator,
+  required,
+} from "../../../utils/validators/validators";
+import { TextArea } from "../../common/FormControls/FormControls";
 
 type MyPostsPropsType = {
-  addPost: (newPost: string)=> void;
+  addPost: (newPost: string) => void;
   myPosts: MyPostsType[];
 };
 
@@ -23,9 +28,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
     />
   ));
 
-
   const addPost = (values: FormDataType) => {
-      props.addPost(values.newPostMessage);
+    props.addPost(values.newPostMessage);
   };
 
   // const onPostText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,16 +58,20 @@ export const MyPosts = (props: MyPostsPropsType) => {
     </div>
   );
 };
-
+  const maxLengthCreator30 = maxLengthCreator(30);
 const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field placeholder="add post" name="newPostMessage" component={"input"} />
+      <Field
+        placeholder="add post"
+        name="newPostText"
+        component={TextArea}
+        validate={[required, maxLengthCreator30]}
+      />
       <div>
-      <button className={s.button} >
-          Add post
-        </button>
-        </div>
+        <button className={s.button}>Add post</button>
+      </div>
     </form>
   );
 };
